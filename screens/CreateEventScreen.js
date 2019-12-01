@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, ScrollView, KeyboardAvoidingView, Text } from 'react-native';
+import { Button, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { Header } from 'react-navigation-stack';
 import { Container, Field } from '../components';
 
@@ -8,8 +8,8 @@ const CreateEventScreen = () => {
     eventName: "Baskeire",
     place: "Rua Cariaçu, 120",
     description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    starts: new Date().toDateString(),
-    ends: new Date().toDateString()
+    starts: new Date(),
+    ends: new Date()
   })
 
   const handleChange = (name, text) => {
@@ -27,10 +27,10 @@ const CreateEventScreen = () => {
       <ScrollView>
         <Container>
           <Field label="Event Name" name="eventName" value={inputs.eventName} onChange={handleChange} />
-          <Field label="Place" name="place" value={inputs.place} />
-          <Field label="Description" name="description" value={inputs.description} multiline />
-          <Field label="Starts" name="starts" value={inputs.starts} />
-          <Field label="Ends" name="ends" value={inputs.ends} />
+          <Field label="Place" name="place" value={inputs.place} onChange={handleChange} />
+          <Field label="Description" name="description" value={inputs.description} onChange={handleChange} multiline />
+          <Field label="Starts" name="starts" value={inputs.starts} hasDatePicker />
+          <Field label="Ends" name="ends" value={inputs.ends} hasDatePicker />
         </Container>
       </ScrollView>
     </KeyboardAvoidingView>
