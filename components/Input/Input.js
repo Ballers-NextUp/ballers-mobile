@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
 import { DatePickerIOS, View } from 'react-native';
+import moment from 'moment'
 
 const StyledTextInput = styled.TextInput`
   padding: 8px 4px;
@@ -44,7 +45,7 @@ const Input = ({value, name, onChange, onBlur, onFocus, hasDatePicker, ...rest})
       <StyledTextInput
         value={
           hasDatePicker && inputValue instanceof Date
-            ? inputValue.toDateString()
+            ? moment(inputValue).format('LLL')
             : inputValue
         }
         onFocus={handleFocus}
