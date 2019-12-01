@@ -1,37 +1,50 @@
-import React from 'react';
-import { StyleSheet, View, Text, Button, ScrollView } from 'react-native';
-import { TextField } from 'react-native-material-textfield';
+import React, { useState } from 'react';
+import { Button, ScrollView, KeyboardAvoidingView, Text } from 'react-native';
+import { Header } from 'react-navigation-stack';
+import { Container, Field } from '../components';
 
-export default class CreateEventScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Create Event',
-    headerRight: () => (
-      <Button
-        title="OK"
-        onPress={ () => {}}
-      />
-    )
+const CreateEventScreen = () => {
+  const [inputs, setInputs] = useState({
+    eventName: "Baskeire",
+    place: "Rua Cariaçu, 120",
+    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    starts: new Date().toDateString(),
+    ends: new Date().toDateString()
+  })
+
+  const handleChange = (name, text) => {
+    setInputs({
+      ...inputs,
+      [name]: text
+    })
   }
 
-  render() {
-    return (
+  return (
+    <KeyboardAvoidingView
+        keyboardVerticalOffset={Header.HEIGHT + 20} // adjust the value here if you need more padding
+        style= {{ flex: 1 }}
+        behavior= "padding">
       <ScrollView>
-        <View style={styles.container}>
-          <TextField label="Event" value="" />
-          <TextField label="Place" value="" />
-          <TextField label="Description" value="" multiline />
-        </View>
-
+        <Container>
+          <Field label="Event Name" name="eventName" value={inputs.eventName} onChange={handleChange} />
+          <Field label="Place" name="place" value={inputs.place} />
+          <Field label="Description" name="description" value={inputs.description} multiline />
+          <Field label="Starts" name="starts" value={inputs.starts} />
+          <Field label="Ends" name="ends" value={inputs.ends} />
+        </Container>
       </ScrollView>
-    );
-  }
+    </KeyboardAvoidingView>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'stretch',
-    padding: 24
-  },
-});
+CreateEventScreen.navigationOptions = {
+  title: 'Create Event',
+  headerRight: () => (
+    <Button
+      title="OK"
+      onPress={ () => {}}
+    />
+  )
+}
+
+export default CreateEventScreen

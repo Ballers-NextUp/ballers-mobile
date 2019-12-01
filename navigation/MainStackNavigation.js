@@ -6,10 +6,10 @@ import CreateEventScreen from '../screens/CreateEventScreen'
 const MainStackNavigation = createStackNavigator(
   {
     Home: HomeScreen,
-    Details: CreateEventScreen,
+    CreateEvent: CreateEventScreen,
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'CreateEvent',
   }
 );
 
