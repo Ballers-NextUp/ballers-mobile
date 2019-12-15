@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
-import { DatePickerIOS, View } from 'react-native';
+import { View } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment'
 
 const StyledTextInput = styled.TextInput`
@@ -32,7 +33,7 @@ const Input = ({value, name, onChange, onBlur, onFocus, hasDatePicker, ...rest})
     if (onChange) onChange(name, text);
   }
 
-  const handleDate = datetime => {
+  const handleDate = (event, datetime) => {
     onChangeText(datetime)
   }
 
@@ -57,9 +58,11 @@ const Input = ({value, name, onChange, onBlur, onFocus, hasDatePicker, ...rest})
       {
         hasDatePicker &&
         isFocused &&
-        <DatePickerIOS
-          date={new Date(inputValue)}
-          onDateChange={handleDate}
+        <DateTimePicker
+          mode="datetime"
+          value={new Date(inputValue)}
+          is24Hour={true}
+          onChange={handleDate}
         />
       }
     </View>
