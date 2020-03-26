@@ -1,9 +1,10 @@
 import React from 'react'
-import { View, Text, StyleSheet, Dimensions, StatusBar } from 'react-native'
+import { View, Text, Dimensions, StatusBar } from 'react-native'
 import styled from 'styled-components/native'
-import MapView from 'react-native-maps'
+
 import { LinearGradient } from 'expo-linear-gradient'
-import Carousel from 'react-native-snap-carousel'
+
+import { SearchBar, CardsCarousel, CustomMapView } from '../components'
 
 const screenWidth = Dimensions.get('window').width
 const screenHeight = Dimensions.get('window').height
@@ -34,60 +35,6 @@ const Content = styled.View`
   z-index: 3;
 `
 
-const Card = styled.View`
-  height: 100px;
-  padding: 32px 24px;
-  flex-direction: row;
-  justify-content: space-between;
-  background-color: #fff;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #ccc;
-  border-radius: 10px;
-  shadow-color: #000;
-  shadow-offset: 0 8px;
-  shadow-opacity: 0.15;
-  shadow-radius: 10px;
-  elevation: 24px;
-`
-
-const Title = styled.Text`
-  color: #000;
-  font-size: 16px;
-  font-weight: bold;
-`
-
-const Subtitle = styled.Text`
-  color: #888;
-  font-size: 14px;
-`
-
-const StyledTime = styled.Text`
-  color: #EF4136;
-  font-weight: bold;
-`
-
-const SearchBar = styled.View`
-  position: absolute;
-  width: 100%;
-  top: 80px;
-  padding-horizontal: 32px;
-  z-index: 2;
-`
-
-const SearchInput = styled.TextInput`
-  width: 100%;
-  height: 54px;
-  padding: 16px;
-  background-color: #fff;
-  border-radius: 4px;
-  shadow-color: #000;
-  shadow-offset: 0 8px;
-  shadow-opacity: 0.15;
-  shadow-radius: 10px;
-  elevation: 24px;
-`
-
 const gradientStyles = {
   position: 'absolute',
   width: screenWidth,
@@ -97,45 +44,14 @@ const gradientStyles = {
   zIndex: 2
 }
 
-const mapStyles = {
-  position: 'absolute',
-  width: Dimensions.get('window').width,
-  height: Dimensions.get('window').height,
-  zIndex: 1
-}
-
-const renderItem = ({ item }) => {
-  return (
-    <View style={{ justifyContent: 'center', height: 150 }}>
-      <Card>
-        <View>
-          <Title>{item.name}</Title>
-          <Subtitle>{item.address}</Subtitle>
-        </View>
-        <View>
-          <Text style={{ textAlign: 'right' }}>Today</Text>
-          <StyledTime>19:00</StyledTime>
-        </View>
-      </Card>
-    </View>
-  )
-}
-
 const HomeScreen = () => {
   return (
     <Container>
       <StatusBar barStyle="dark-content" />
-      <SearchBar>
-        <SearchInput value="Search for a pick up game" />
-      </SearchBar>
-      <MapView style={mapStyles} />
+      <SearchBar value="Search for a pick up game" />
+      <CustomMapView />
       <Content>
-        <Carousel
-          data={pickupGames}
-          renderItem={renderItem}
-          sliderWidth={screenWidth}
-          itemWidth={screenWidth - 64}
-        />
+        <CardsCarousel data={pickupGames} />
         <LinearGradient
           colors={['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0.4)', '#fff']}
           style={gradientStyles}
