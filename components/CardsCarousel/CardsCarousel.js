@@ -1,11 +1,9 @@
 import React from 'react'
-import Carousel from 'react-native-snap-carousel'
-import { View, Text, Dimensions } from 'react-native'
-
+import { View, Text } from 'react-native'
 import styled from 'styled-components/native'
+import Carousel from 'react-native-snap-carousel'
 
-const screenWidth = Dimensions.get('window').width
-const screenHeight = Dimensions.get('window').height
+import { screenWidth } from '../../constants'
 
 const Card = styled.View`
   height: 100px;

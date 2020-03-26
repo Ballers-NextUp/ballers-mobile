@@ -1,13 +1,11 @@
 import React from 'react'
-import { View, Text, Dimensions, StatusBar } from 'react-native'
+import { StatusBar } from 'react-native'
 import styled from 'styled-components/native'
 
 import { LinearGradient } from 'expo-linear-gradient'
 
 import { SearchBar, CardsCarousel, CustomMapView } from '../components'
-
-const screenWidth = Dimensions.get('window').width
-const screenHeight = Dimensions.get('window').height
+import { screenWidth, screenHeight } from '../constants'
 
 const pickupGames = [
   {

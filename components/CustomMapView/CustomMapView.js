@@ -1,9 +1,7 @@
 import React from 'react'
-import { Dimensions } from 'react-native'
 import MapView from 'react-native-maps'
 
-const screenWidth = Dimensions.get('window').width
-const screenHeight = Dimensions.get('window').height
+import { screenWidth, screenHeight } from '../../constants'
 
 const mapStyles = {
   position: 'absolute',
