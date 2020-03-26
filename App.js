@@ -1,12 +1,14 @@
-import React from 'react';
-import { createAppContainer } from 'react-navigation';
+import React from 'react'
+import { NavigationContainer } from '@react-navigation/native'
 
-import RootStack from './navigation/MainStackNavigation'
-
-const AppContainer = createAppContainer(RootStack);
+import MainStackNavigation from './navigation/MainStackNavigation'
 
 const App = () => {
-  return ( <AppContainer /> );
+  return (
+    <NavigationContainer>
+      <MainStackNavigation />
+    </NavigationContainer>
+  );
 }
 
 export default App
