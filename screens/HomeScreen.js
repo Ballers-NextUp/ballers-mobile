@@ -67,6 +67,27 @@ const StyledTime = styled.Text`
   font-weight: bold;
 `
 
+const SearchBar = styled.View`
+  position: absolute;
+  width: 100%;
+  top: 80px;
+  padding-horizontal: 32px;
+  z-index: 2;
+`
+
+const SearchInput = styled.TextInput`
+  width: 100%;
+  height: 54px;
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 4px;
+  shadow-color: #000;
+  shadow-offset: 0 8px;
+  shadow-opacity: 0.15;
+  shadow-radius: 10px;
+  elevation: 24px;
+`
+
 const gradientStyles = {
   position: 'absolute',
   width: screenWidth,
@@ -104,6 +125,9 @@ const HomeScreen = () => {
   return (
     <Container>
       <StatusBar barStyle="dark-content" />
+      <SearchBar>
+        <SearchInput value="Search for a pick up game" />
+      </SearchBar>
       <MapView style={mapStyles} />
       <Content>
         <Carousel
