@@ -2,10 +2,11 @@ import React from 'react'
 import { View, Text } from 'react-native'
 import styled from 'styled-components/native'
 import Carousel from 'react-native-snap-carousel'
+import { useNavigation } from '@react-navigation/native';
 
 import { screenWidth } from '../../constants'
 
-const Card = styled.View`
+const Card = styled.TouchableOpacity`
   height: 100px;
   padding: 32px 24px;
   flex-direction: row;
@@ -38,18 +39,26 @@ const StyledTime = styled.Text`
   font-weight: bold;
 `
 
-const renderItem = ({ item }) => {
+const renderItem = ({ item, index }) => {
+  return <CardContainer item={item} index={index} />
+}
+
+const CardContainer = ({ item, index }) => {
+  const navigation = useNavigation()
+
   return (
     <View style={{ justifyContent: 'center', height: 150 }}>
-      <Card>
-        <View>
-          <Title>{item.name}</Title>
-          <Subtitle>{item.address}</Subtitle>
-        </View>
-        <View>
-          <Text style={{ textAlign: 'right' }}>Today</Text>
-          <StyledTime>19:00</StyledTime>
-        </View>
+      <Card onPress={() => navigation.navigate('Details', { id: index })}>
+        <>
+          <View>
+            <Title>{item.name}</Title>
+            <Subtitle>{item.address}</Subtitle>
+          </View>
+          <View>
+            <Text style={{ textAlign: 'right' }}>Today</Text>
+            <StyledTime>19:00</StyledTime>
+          </View>
+        </>
       </Card>
     </View>
   )
@@ -62,6 +71,7 @@ const CardsCarousel = ({data}) => {
       renderItem={renderItem}
       sliderWidth={screenWidth}
       itemWidth={screenWidth - 64}
+      removeClippedSubviews={false}
     />
   )
 }
