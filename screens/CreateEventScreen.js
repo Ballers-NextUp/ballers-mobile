@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import { Button, ScrollView, KeyboardAvoidingView } from 'react-native';
-import { Header } from 'react-navigation-stack';
-import { Container, Field } from '../components';
+import React, { useState, useLayoutEffect } from 'react'
+import { ScrollView, KeyboardAvoidingView, Button } from 'react-native'
+import { Container, Field } from '../components'
 
-const CreateEventScreen = () => {
+const CreateEventScreen = ({ navigation }) => {
   const [inputs, setInputs] = useState({
     eventName: "Baskeire",
     place: "Rua Cariaçu, 120",
@@ -19,12 +18,17 @@ const CreateEventScreen = () => {
     })
   }
 
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Button onPress={() => alert('Saved')} title="Save" />
+      ),
+    })
+  })
+
   return (
-    <KeyboardAvoidingView
-        keyboardVerticalOffset={Header.HEIGHT + 20} // adjust the value here if you need more padding
-        style= {{ flex: 1 }}
-        behavior= "padding">
-      <ScrollView>
+    <KeyboardAvoidingView style= {{ flex: 1 }} behavior= "padding">
+      <ScrollView contentContainerStyle={{ backgroundColor: '#fff', flex: 1 }}>
         <Container>
           <Field label="Event Name" name="eventName" value={inputs.eventName} onChange={handleChange} />
           <Field label="Place" name="place" value={inputs.place} onChange={handleChange} />
@@ -34,16 +38,6 @@ const CreateEventScreen = () => {
         </Container>
       </ScrollView>
     </KeyboardAvoidingView>
-  )
-}
-
-CreateEventScreen.navigationOptions = {
-  title: 'Create Event',
-  headerRight: () => (
-    <Button
-      title="OK"
-      onPress={ () => {}}
-    />
   )
 }
 

@@ -85,10 +85,10 @@ const DetailsScreen = ({ navigation, route }) => {
       <Header>
         <HeaderTitle>Pickup Game {id}</HeaderTitle>
         <HeaderActions>
-          <HeaderButton isIcon onPress={()=> navigation.goBack()}>
+          <HeaderButton isIcon onPress={() => navigation.goBack()}>
             <Feather name="chevron-left" size={20} color="#fff" />
           </HeaderButton>
-          <HeaderButton>
+          <HeaderButton onPress={() => navigation.navigate('Edit')}>
             <HeaderButtonText>Editar</HeaderButtonText>
           </HeaderButton>
         </HeaderActions>
