@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components/native'
-import { ScrollView, View, Text } from 'react-native'
+import { ScrollView } from 'react-native'
 
-import { ActionsBar, ActionsBarButton, LabeledInfo } from '../components'
+import { ActionsBar, ActionsBarButton, LabeledInfo, Avatar } from '../components'
 
 const Header = styled.View`
   width: 100%;
@@ -21,14 +21,6 @@ const Content = styled.View`
   padding: 10px 20px;
 `
 
-const Avatar = styled.Image`
-  width: 42px;
-  height: 42px;
-  background-color: #3431CD;
-  border-radius: 500;
-  margin-right: 16px;
-`
-
 const DetailsScreen = ({ navigation, route }) => {
   const { id } = route.params
 
@@ -43,8 +35,8 @@ const DetailsScreen = ({ navigation, route }) => {
       </Header>
       <Content>
         <LabeledInfo padded alignItems="center" flexDirection="row">
-          <Avatar />
-          <LabeledInfo label="Manager" text="Fulano da Silva" />
+          <Avatar name="Fulano da Silva" />
+          <LabeledInfo label="Fulano da Silva" text="Manager" />
         </LabeledInfo>
         <LabeledInfo label="Place" text="Rua Cariaçu, 120" padded />
         <LabeledInfo label="Date and time" text="Wed 31 Jul, 19:00-21:30" padded />
