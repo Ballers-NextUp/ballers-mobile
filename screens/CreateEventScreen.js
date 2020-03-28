@@ -1,12 +1,14 @@
 import React, { useState, useLayoutEffect } from 'react'
-import { ScrollView, KeyboardAvoidingView, Button } from 'react-native'
+import { ScrollView, KeyboardAvoidingView, Button, Image } from 'react-native'
 import styled from 'styled-components/native'
 import { Container, FormField, ActionsBarButton } from '../components'
+import { LinearGradient } from 'expo-linear-gradient'
 
 const StyledImageUpload = styled.View`
   position: relative;
   width: 100%;
   height: 280px;
+  background-color: #666;
 `
 
 const StyleImageContainer = styled.View`
@@ -17,8 +19,24 @@ const StyleImageContainer = styled.View`
   flex-direction: column-reverse;
   justify-content: flex-start;
   align-items: flex-end;
-  background-color: #666;
+  z-index: 3;
 `
+
+const StyledImage = styled.Image`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+`
+
+const gradientStyles = {
+  position: 'absolute',
+  left: 0,
+  right: 0,
+  bottom: 0,
+  height: '100%',
+  zIndex: 2
+}
 
 const CreateEventScreen = ({ navigation }) => {
   const [inputs, setInputs] = useState({
@@ -51,6 +69,11 @@ const CreateEventScreen = ({ navigation }) => {
           <StyleImageContainer>
             <ActionsBarButton iconName="camera" iconColor="#fff"></ActionsBarButton>
           </StyleImageContainer>
+          <StyledImage source={{ uri: 'https://scontent-gig2-1.xx.fbcdn.net/v/t1.0-9/79824427_2514272002176491_5021983144702640128_n.jpg?_nc_cat=106&_nc_sid=110474&_nc_ohc=fS-81im1NlgAX_Hbg9u&_nc_ht=scontent-gig2-1.xx&oh=d3bfc1ac3c033011fb91244ab66f64a8&oe=5EA44FF9' }} />
+          <LinearGradient
+            colors={['transparent', 'rgba(0,0,0,0.8)' ]}
+            style={gradientStyles}
+          />
         </StyledImageUpload>
         <Container>
           <FormField label="Event Name" name="eventName" value={inputs.eventName} onChange={handleChange} />

@@ -20,7 +20,7 @@ const Card = styled.TouchableOpacity`
   shadow-offset: 0 8px;
   shadow-opacity: 0.15;
   shadow-radius: 10px;
-  elevation: 24px;
+  elevation: 6px;
 `
 
 const Title = styled.Text`
