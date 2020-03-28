@@ -1,17 +1,20 @@
 import Input from './Input'
 import Container from './Container'
 import Label from './Label'
-import Field from './Field'
+import FormField from './FormField'
 import SearchBar from './SearchBar'
 import CardsCarousel from './CardsCarousel'
 import CustomMapView from './CustomMapView'
+import { ActionsBar, ActionsBarButton } from './ActionsBar'
 
 export {
   Input,
   Container,
   Label,
-  Field,
+  FormField,
   SearchBar,
   CardsCarousel,
-  CustomMapView
+  CustomMapView,
+  ActionsBar,
+  ActionsBarButton
 }

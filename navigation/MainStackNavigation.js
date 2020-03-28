@@ -8,8 +8,8 @@ const Stack = createStackNavigator()
 
 const MainStackNavigation = () => (
   <Stack.Navigator>
+    {/* <Stack.Screen name="Get Started" component={GetStartedScreen} options={{ headerShown: false }}/> */}
     <Stack.Screen name="Main" component={MainTabNavigation} options={{ headerShown: false }} />
-    <Stack.Screen name="Get Started" component={GetStartedScreen} options={{ headerShown: false }}/>
     <Stack.Screen name="Details" component={DetailsScreen} options={{ headerShown: false }} />
     <Stack.Screen name="Edit" component={CreateEventScreen} options={{ headerBackTitle: 'Back' }} />
   </Stack.Navigator>

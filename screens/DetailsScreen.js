@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components/native'
 import { ScrollView, View, Text } from 'react-native'
-import { Feather } from '@expo/vector-icons'
-import Constants from 'expo-constants';
+
+import { ActionsBar, ActionsBarButton } from '../components'
 
 const Header = styled.View`
   width: 100%;
@@ -14,37 +14,6 @@ const Header = styled.View`
 const HeaderTitle = styled.Text`
   padding: 20px;
   font-size: 20px;
-  color: #fff;
-`
-
-const HeaderActions = styled.View`
-  width: 100%;
-  position: absolute;
-  top: ${Constants.statusBarHeight*2};
-  padding-horizontal: 20px;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`
-
-const HeaderButton = styled.TouchableOpacity`
-  padding: 8px 12px;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.25);
-  border-radius: 4px;
-  ${({ isIcon }) => isIcon
-    ?`
-      width: 36px;
-      height: 36px;
-      padding: 4px;
-      border-radius: 500px;
-    `
-    : ''
-  }
-`
-
-const HeaderButtonText = styled.Text`
   color: #fff;
 `
 
@@ -84,14 +53,10 @@ const DetailsScreen = ({ navigation, route }) => {
     <ScrollView>
       <Header>
         <HeaderTitle>Pickup Game {id}</HeaderTitle>
-        <HeaderActions>
-          <HeaderButton isIcon onPress={() => navigation.goBack()}>
-            <Feather name="chevron-left" size={20} color="#fff" />
-          </HeaderButton>
-          <HeaderButton onPress={() => navigation.navigate('Edit')}>
-            <HeaderButtonText>Editar</HeaderButtonText>
-          </HeaderButton>
-        </HeaderActions>
+        <ActionsBar>
+          <ActionsBarButton iconName="chevron-left" iconColor="#fff" onPress={() => navigation.goBack()} />
+          <ActionsBarButton text="Editar" onPress={() => navigation.navigate('Edit')} />
+        </ActionsBar>
       </Header>
       <Content>
         <Field padded alignItems="center" flexDirection="row">
