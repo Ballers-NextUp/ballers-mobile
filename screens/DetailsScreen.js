@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components/native'
 import { ScrollView, View, Text } from 'react-native'
 
-import { ActionsBar, ActionsBarButton } from '../components'
+import { ActionsBar, ActionsBarButton, LabeledInfo } from '../components'
 
 const Header = styled.View`
   width: 100%;
@@ -29,23 +29,6 @@ const Avatar = styled.Image`
   margin-right: 16px;
 `
 
-const Field = styled.View`
-  padding-vertical: ${props => props.padded ? '10px' : 0};
-  align-items: ${({alignItems}) => alignItems ? alignItems : 'flex-start'};
-  flex-direction: ${({flexDirection})=> flexDirection ? flexDirection : 'column'};
-`
-
-const FieldLabel = styled.Text`
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 2px;
-`
-
-const FieldText = styled.Text`
-  font-size: 16px;
-  color: #545151;
-`
-
 const DetailsScreen = ({ navigation, route }) => {
   const { id } = route.params
 
@@ -59,25 +42,13 @@ const DetailsScreen = ({ navigation, route }) => {
         </ActionsBar>
       </Header>
       <Content>
-        <Field padded alignItems="center" flexDirection="row">
+        <LabeledInfo padded alignItems="center" flexDirection="row">
           <Avatar />
-          <Field>
-            <FieldLabel>Manager</FieldLabel>
-            <FieldText>Fulano da Silva</FieldText>
-          </Field>
-        </Field>
-        <Field padded>
-          <FieldLabel>Place</FieldLabel>
-          <FieldText>Rua Cariaçu, 120</FieldText>
-        </Field>
-        <Field padded>
-          <FieldLabel>Date and time</FieldLabel>
-          <FieldText>Wed 31 Jul, 19:00-21:30</FieldText>
-        </Field>
-        <Field padded>
-          <FieldLabel>Description</FieldLabel>
-          <FieldText>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</FieldText>
-        </Field>
+          <LabeledInfo label="Manager" text="Fulano da Silva" />
+        </LabeledInfo>
+        <LabeledInfo label="Place" text="Rua Cariaçu, 120" padded />
+        <LabeledInfo label="Date and time" text="Wed 31 Jul, 19:00-21:30" padded />
+        <LabeledInfo label="Description" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." padded />
       </Content>
     </ScrollView>
   )

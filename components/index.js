@@ -6,6 +6,7 @@ import SearchBar from './SearchBar'
 import CardsCarousel from './CardsCarousel'
 import CustomMapView from './CustomMapView'
 import { ActionsBar, ActionsBarButton } from './ActionsBar'
+import LabeledInfo from './LabeledInfo'
 
 export {
   Input,
@@ -16,5 +17,6 @@ export {
   CardsCarousel,
   CustomMapView,
   ActionsBar,
-  ActionsBarButton
+  ActionsBarButton,
+  LabeledInfo
 }
