@@ -6,7 +6,7 @@ import { ActionsBar, ActionsBarButton, LabeledInfo, Avatar } from '../components
 
 const Header = styled.View`
   width: 100%;
-  height: 320;
+  height: 320px;
   flex-direction: column-reverse;
   background-color: rgba(0, 0, 0, 0.6);
 `

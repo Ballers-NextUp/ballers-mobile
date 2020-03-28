@@ -1,6 +1,24 @@
 import React, { useState, useLayoutEffect } from 'react'
 import { ScrollView, KeyboardAvoidingView, Button } from 'react-native'
-import { Container, FormField } from '../components'
+import styled from 'styled-components/native'
+import { Container, FormField, ActionsBarButton } from '../components'
+
+const StyledImageUpload = styled.View`
+  position: relative;
+  width: 100%;
+  height: 280px;
+`
+
+const StyleImageContainer = styled.View`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
+  align-items: flex-end;
+  background-color: #666;
+`
 
 const CreateEventScreen = ({ navigation }) => {
   const [inputs, setInputs] = useState({
@@ -28,7 +46,12 @@ const CreateEventScreen = ({ navigation }) => {
 
   return (
     <KeyboardAvoidingView style= {{ flex: 1 }} behavior= "padding">
-      <ScrollView contentContainerStyle={{ backgroundColor: '#fff', flex: 1 }}>
+      <ScrollView contentContainerStyle={{ backgroundColor: '#fff'}}>
+        <StyledImageUpload>
+          <StyleImageContainer>
+            <ActionsBarButton iconName="camera" iconColor="#fff"></ActionsBarButton>
+          </StyleImageContainer>
+        </StyledImageUpload>
         <Container>
           <FormField label="Event Name" name="eventName" value={inputs.eventName} onChange={handleChange} />
           <FormField label="Place" name="place" value={inputs.place} onChange={handleChange} />
