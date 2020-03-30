@@ -3,6 +3,9 @@ import { ScrollView, KeyboardAvoidingView, Button, Image } from 'react-native'
 import styled from 'styled-components/native'
 import { Container, FormField, ActionsBarButton } from '../components'
 import { LinearGradient } from 'expo-linear-gradient'
+import * as ImagePicker from 'expo-image-picker'
+import Constants from 'expo-constants'
+import * as Permissions from 'expo-permissions'
 
 const StyledImageUpload = styled.View`
   position: relative;
@@ -46,12 +49,28 @@ const CreateEventScreen = ({ navigation }) => {
     starts: new Date(),
     ends: new Date()
   })
+  const [image, setImage] = useState(null)
 
   const handleChange = (name, text) => {
     setInputs({
       ...inputs,
       [name]: text
     })
+  }
+
+  const chooseImage = async () => {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL)
+
+    if (status !== 'granted') return
+
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 0.5
+    })
+
+    setImage(result.uri)
   }
 
   useLayoutEffect(() => {
@@ -62,14 +81,16 @@ const CreateEventScreen = ({ navigation }) => {
     })
   })
 
+  console.log(image)
+
   return (
     <KeyboardAvoidingView style= {{ flex: 1 }} behavior= "padding">
       <ScrollView contentContainerStyle={{ backgroundColor: '#fff'}}>
         <StyledImageUpload>
           <StyleImageContainer>
-            <ActionsBarButton iconName="camera" iconColor="#fff"></ActionsBarButton>
+            <ActionsBarButton iconName="camera" iconColor="#fff" onPress={chooseImage}></ActionsBarButton>
           </StyleImageContainer>
-          <StyledImage source={{ uri: 'https://scontent-gig2-1.xx.fbcdn.net/v/t1.0-9/79824427_2514272002176491_5021983144702640128_n.jpg?_nc_cat=106&_nc_sid=110474&_nc_ohc=fS-81im1NlgAX_Hbg9u&_nc_ht=scontent-gig2-1.xx&oh=d3bfc1ac3c033011fb91244ab66f64a8&oe=5EA44FF9' }} />
+          { image && <StyledImage source={{ uri: image }} /> }
           <LinearGradient
             colors={['transparent', 'rgba(0,0,0,0.8)' ]}
             style={gradientStyles}
