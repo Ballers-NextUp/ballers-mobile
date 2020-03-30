@@ -1,5 +1,5 @@
 import React from 'react'
-import MapView from 'react-native-maps'
+import MapView, { PROVIDER_GOOGLE }from 'react-native-maps'
 
 import { screenWidth, screenHeight } from '../../constants'
 
@@ -12,7 +12,9 @@ const mapStyles = {
 
 const CustomMapView = ({ children, ...rest }) => {
   return (
-    <MapView style={mapStyles} {...rest}>
+    <MapView
+      provider={PROVIDER_GOOGLE}
+      style={mapStyles} {...rest}>
       { children }
     </MapView>
   )
