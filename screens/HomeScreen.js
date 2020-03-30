@@ -10,19 +10,21 @@ import { Marker } from 'react-native-maps'
 
 const pickupGames = [
   {
-    name: 'Baskeire',
-    address: 'Rua Cariaçu, 120',
-    coords: {
-      latitude: -22.883240,
-      longitude: -43.374570
-    }
-  },
-  {
+    id: 0,
     name: 'IBB - Betânia',
     address: 'Quadra da igreja',
     coords: {
       latitude: -22.886260,
       longitude: -43.411640
+    }
+  },
+  {
+    id: 1,
+    name: 'Baskeire',
+    address: 'Rua Cariaçu, 120',
+    coords: {
+      latitude: -22.883240,
+      longitude: -43.374570
     }
   }
 ]
@@ -41,7 +43,7 @@ const Content = styled.View`
   z-index: 3;
 `
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   const [userLocation, setUserLocation] = useState(null)
   const [region, setRegion] = useState({
     longitude: -43.1822319, // TODO: calculate this number
@@ -60,6 +62,25 @@ const HomeScreen = () => {
     setUserLocation(location)
   }
 
+  const regionFrom = (lat, lon, distance) => {
+    distance = distance/2
+    const circumference = 40075
+    const oneDegreeOfLatitudeInMeters = 111.32 * 1000
+    const angularDistance = distance/circumference
+
+    const latitudeDelta = distance / oneDegreeOfLatitudeInMeters
+    const longitudeDelta = Math.abs(Math.atan2(
+      Math.sin(angularDistance)*Math.cos(lat),
+      Math.cos(angularDistance) - Math.sin(lat) * Math.sin(lat)))
+
+    return result = {
+      latitude: lat,
+      longitude: lon,
+      latitudeDelta,
+      longitudeDelta,
+    }
+  }
+
   useEffect(() => {
     getLocationAsync()
   }, [])
@@ -68,13 +89,9 @@ const HomeScreen = () => {
     if (!userLocation) return
 
     const { latitude, longitude } = userLocation.coords
+    const calculatedRegion = regionFrom(latitude, longitude, 5000)
 
-    setRegion({
-      latitude,
-      longitude,
-      latitudeDelta: 0.0922, // TODO: calculate this number
-      longitudeDelta: 0.0421, // TODO: calculate this number
-    })
+    setRegion(calculatedRegion)
   }, [userLocation])
 
   return (
@@ -83,12 +100,13 @@ const HomeScreen = () => {
       <SearchBar value="Search for a pick up game" />
       <CustomMapView region={region} showsUserLocation={true}>
         {
-          pickupGames.map((court, index) => (
+          pickupGames.map(court => (
             <Marker
-              key={index}
+              key={court.id}
               coordinate={court.coords}
               title={court.name}
               description={court.address}
+              onPress={() => navigation.navigate('Details', { id: court.id })}
             />
           ))
         }
