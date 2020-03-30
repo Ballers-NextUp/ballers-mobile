@@ -6,15 +6,24 @@ import * as Permissions from 'expo-permissions'
 
 import { SearchBar, CardsCarousel, CustomMapView } from '../components'
 import { screenWidth, screenHeight } from '../constants'
+import { Marker } from 'react-native-maps'
 
 const pickupGames = [
   {
     name: 'Baskeire',
     address: 'Rua Cariaçu, 120',
+    coords: {
+      latitude: -22.883240,
+      longitude: -43.374570
+    }
   },
   {
     name: 'IBB - Betânia',
     address: 'Quadra da igreja',
+    coords: {
+      latitude: -22.886260,
+      longitude: -43.411640
+    }
   }
 ]
 
@@ -35,8 +44,8 @@ const Content = styled.View`
 const HomeScreen = () => {
   const [userLocation, setUserLocation] = useState(null)
   const [region, setRegion] = useState({
-    longitude: 0,
-    latitude: 0,
+    longitude: -43.1822319, // TODO: calculate this number
+    latitude: -22.9064198, // TODO: calculate this number
     longitudeDelta: 0,
     latitudeDelta: 0
   })
@@ -66,13 +75,24 @@ const HomeScreen = () => {
       latitudeDelta: 0.0922, // TODO: calculate this number
       longitudeDelta: 0.0421, // TODO: calculate this number
     })
-  }, [])
+  }, [userLocation])
 
   return (
     <Container>
       <StatusBar barStyle="dark-content" />
       <SearchBar value="Search for a pick up game" />
-      <CustomMapView region={region} showsUserLocation={true} />
+      <CustomMapView region={region} showsUserLocation={true}>
+        {
+          pickupGames.map((court, index) => (
+            <Marker
+              key={index}
+              coordinate={court.coords}
+              title={court.name}
+              description={court.address}
+            />
+          ))
+        }
+      </CustomMapView>
       <Content>
         <CardsCarousel data={pickupGames} />
       </Content>
