@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { StatusBar } from 'react-native'
 import styled from 'styled-components/native'
+import * as Location from 'expo-location'
+import * as Permissions from 'expo-permissions'
+import { Marker } from 'react-native-maps'
 
 import { SearchBar, CardsCarousel, CustomMapView } from '../components'
 import { screenWidth, screenHeight } from '../constants'
@@ -31,11 +34,35 @@ const Content = styled.View`
 `
 
 const HomeScreen = () => {
+  const [location, setLocation] = useState(null)
+
+  const getLocationAsync = async () => {
+    const { status } = await Permissions.askAsync(Permissions.LOCATION)
+
+    if (status !== 'granted') return
+
+    const locationData = await Location.getCurrentPositionAsync()
+
+    setLocation(locationData)
+  }
+
+  useEffect(() => {
+    getLocationAsync()
+  }, [])
+
   return (
     <Container>
       <StatusBar barStyle="dark-content" />
       <SearchBar value="Search for a pick up game" />
-      <CustomMapView />
+      <CustomMapView>
+        {
+          location && <Marker coordinate={{
+              latitude: location.coords.latitude,
+              longitude: location.coords.longitude
+            }}
+          />
+        }
+      </CustomMapView>
       <Content>
         <CardsCarousel data={pickupGames} />
       </Content>
