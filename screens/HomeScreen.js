@@ -8,26 +8,7 @@ import { Marker } from 'react-native-maps'
 import { SearchBar, CardsCarousel, CustomMapView } from '../components'
 import { screenWidth, screenHeight } from '../constants'
 
-const pickupGames = [
-  {
-    id: 0,
-    name: 'IBB - Betânia',
-    address: 'Quadra da igreja',
-    coords: {
-      latitude: -22.88626,
-      longitude: -43.41164,
-    },
-  },
-  {
-    id: 1,
-    name: 'Baskeire',
-    address: 'Rua Cariaçu, 120',
-    coords: {
-      latitude: -22.88324,
-      longitude: -43.37457,
-    },
-  },
-]
+import events from '../constants/sample'
 
 const Container = styled.View`
   width: ${screenWidth};
@@ -45,12 +26,7 @@ const Content = styled.View`
 
 const HomeScreen = ({ navigation }) => {
   const [userLocation, setUserLocation] = useState(null)
-  const [region, setRegion] = useState({
-    longitude: -43.1822319, // TODO: calculate this number
-    latitude: -22.9064198, // TODO: calculate this number
-    longitudeDelta: 0,
-    latitudeDelta: 0,
-  })
+  const [region, setRegion] = useState(null)
 
   const getLocationAsync = async () => {
     const { status } = await Permissions.askAsync(Permissions.LOCATION)
@@ -101,19 +77,21 @@ const HomeScreen = ({ navigation }) => {
     <Container>
       <StatusBar barStyle="dark-content" />
       <SearchBar value="Search for a pick up game" />
-      <CustomMapView region={region} showsUserLocation>
-        {pickupGames.map((court) => (
-          <Marker
-            key={court.id}
-            coordinate={court.coords}
-            title={court.name}
-            description={court.address}
-            onPress={() => navigation.navigate('Details', { id: court.id })}
-          />
-        ))}
-      </CustomMapView>
+      {region &&
+        <CustomMapView region={region} showsUserLocation>
+          {events.map((event) => (
+            <Marker
+              key={event.id}
+              coordinate={event.coords}
+              title={event.name}
+              description={event.address}
+              onPress={() => navigation.navigate('Details', { id: event.id })}
+            />
+          ))}
+        </CustomMapView>
+      }
       <Content>
-        <CardsCarousel data={pickupGames} />
+        <CardsCarousel data={events} />
       </Content>
     </Container>
   )

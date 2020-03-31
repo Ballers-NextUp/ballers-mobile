@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components/native'
 import { ScrollView } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
+
+import events from '../constants/sample'
 
 import {
   ActionsBar,
@@ -54,11 +56,12 @@ const gradientStyles = {
 
 const DetailsScreen = ({ navigation, route }) => {
   const { id } = route.params
+  const [courtEvent] = useState(() => events.find((event) => event.id === id))
 
   return (
     <ScrollView>
       <Header>
-        <HeaderTitle>Pickup Game {id}</HeaderTitle>
+        <HeaderTitle>{courtEvent.name}</HeaderTitle>
         <HeaderActions>
           <ActionsBar>
             <ActionsBarButton
@@ -72,12 +75,9 @@ const DetailsScreen = ({ navigation, route }) => {
             />
           </ActionsBar>
         </HeaderActions>
-        <HeaderImage
-          source={{
-            uri:
-              'https://scontent-gig2-1.xx.fbcdn.net/v/t1.0-9/79824427_2514272002176491_5021983144702640128_n.jpg?_nc_cat=106&_nc_sid=110474&_nc_ohc=fS-81im1NlgAX_Hbg9u&_nc_ht=scontent-gig2-1.xx&oh=d3bfc1ac3c033011fb91244ab66f64a8&oe=5EA44FF9',
-          }}
-        />
+        {courtEvent.img_src && (
+          <HeaderImage source={{ uri: courtEvent.img_src }} />
+        )}
         <LinearGradient
           colors={['transparent', 'rgba(0,0,0,0.8)']}
           style={gradientStyles}
@@ -85,26 +85,12 @@ const DetailsScreen = ({ navigation, route }) => {
       </Header>
       <Content>
         <LabeledInfo padded alignItems="center" flexDirection="row">
-          <Avatar
-            source={{
-              uri:
-                'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/e0/e078b72177f470a38913670cde5abe40b28ba686.jpg',
-            }}
-            name="Fulano da Silva"
-          />
-          <LabeledInfo label="Fulano da Silva" text="Creator" />
+          <Avatar name={courtEvent.creator} />
+          <LabeledInfo label={courtEvent.creator} text="Creator" />
         </LabeledInfo>
-        <LabeledInfo label="Place" text="Rua Cariaçu, 120" padded />
-        <LabeledInfo
-          label="Date and time"
-          text="Wed 31 Jul, 19:00-21:30"
-          padded
-        />
-        <LabeledInfo
-          label="Description"
-          text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-          padded
-        />
+        <LabeledInfo label="Place" text={courtEvent.address} padded />
+        <LabeledInfo label="Date and time" text={courtEvent.datetime} padded />
+        <LabeledInfo label="Description" text={courtEvent.description} padded />
       </Content>
     </ScrollView>
   )
