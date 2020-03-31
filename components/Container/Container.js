@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
 const StyledContainer = styled.View`
   flex-grow: 1;
@@ -9,9 +9,7 @@ const StyledContainer = styled.View`
 `
 
 const Container = ({ children, ...rest }) => {
-  return <StyledContainer {...rest}>
-    {children}
-  </StyledContainer>
+  return <StyledContainer {...rest}>{children}</StyledContainer>
 }
 
 export default Container

@@ -9,7 +9,17 @@ const StyleField = styled.View`
   margin-bottom: 32px;
 `
 
-const Field = ({label, value, onChange, onBlur, onFocus, multiline, name, hasDatePicker, ...rest}) => {
+const Field = ({
+  label,
+  value,
+  onChange,
+  onBlur,
+  onFocus,
+  multiline,
+  name,
+  hasDatePicker,
+  ...rest
+}) => {
   return (
     <StyleField {...rest}>
       <Label text={label} />

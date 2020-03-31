@@ -6,7 +6,7 @@ import { setAvatarBackgroundColor } from '../../helpers'
 const StyledAvatar = styled.Image`
   width: 42px;
   height: 42px;
-  background-color: #3431CD;
+  background-color: #3431cd;
   border-radius: 500;
   margin-right: 16px;
 `
@@ -27,14 +27,14 @@ const StyledInitial = styled.Text`
   font-size: 16px;
 `
 
-const Avatar = ({ source, name, ...rest}) => {
-  return source
-    ? <StyledAvatar source={source} {...rest} />
-    : (
-      <StyledAvatarPlaceholder backgroundColor={setAvatarBackgroundColor(name)}>
-        <StyledInitial>{name.charAt(0)}</StyledInitial>
-      </StyledAvatarPlaceholder>
-    )
+const Avatar = ({ source, name, ...rest }) => {
+  return source ? (
+    <StyledAvatar source={source} {...rest} />
+  ) : (
+    <StyledAvatarPlaceholder backgroundColor={setAvatarBackgroundColor(name)}>
+      <StyledInitial>{name.charAt(0)}</StyledInitial>
+    </StyledAvatarPlaceholder>
+  )
 }
 
 export default Avatar

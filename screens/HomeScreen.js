@@ -4,9 +4,9 @@ import styled from 'styled-components/native'
 import * as Location from 'expo-location'
 import * as Permissions from 'expo-permissions'
 
+import { Marker } from 'react-native-maps'
 import { SearchBar, CardsCarousel, CustomMapView } from '../components'
 import { screenWidth, screenHeight } from '../constants'
-import { Marker } from 'react-native-maps'
 
 const pickupGames = [
   {
@@ -14,19 +14,19 @@ const pickupGames = [
     name: 'IBB - Betânia',
     address: 'Quadra da igreja',
     coords: {
-      latitude: -22.886260,
-      longitude: -43.411640
-    }
+      latitude: -22.88626,
+      longitude: -43.41164,
+    },
   },
   {
     id: 1,
     name: 'Baskeire',
     address: 'Rua Cariaçu, 120',
     coords: {
-      latitude: -22.883240,
-      longitude: -43.374570
-    }
-  }
+      latitude: -22.88324,
+      longitude: -43.37457,
+    },
+  },
 ]
 
 const Container = styled.View`
@@ -49,7 +49,7 @@ const HomeScreen = ({ navigation }) => {
     longitude: -43.1822319, // TODO: calculate this number
     latitude: -22.9064198, // TODO: calculate this number
     longitudeDelta: 0,
-    latitudeDelta: 0
+    latitudeDelta: 0,
   })
 
   const getLocationAsync = async () => {
@@ -63,17 +63,20 @@ const HomeScreen = ({ navigation }) => {
   }
 
   const regionFrom = (lat, lon, distance) => {
-    distance = distance/2
+    distance /= 2
     const circumference = 40075
     const oneDegreeOfLatitudeInMeters = 111.32 * 1000
-    const angularDistance = distance/circumference
+    const angularDistance = distance / circumference
 
     const latitudeDelta = distance / oneDegreeOfLatitudeInMeters
-    const longitudeDelta = Math.abs(Math.atan2(
-      Math.sin(angularDistance)*Math.cos(lat),
-      Math.cos(angularDistance) - Math.sin(lat) * Math.sin(lat)))
+    const longitudeDelta = Math.abs(
+      Math.atan2(
+        Math.sin(angularDistance) * Math.cos(lat),
+        Math.cos(angularDistance) - Math.sin(lat) * Math.sin(lat)
+      )
+    )
 
-    return result = {
+    return {
       latitude: lat,
       longitude: lon,
       latitudeDelta,
@@ -98,18 +101,16 @@ const HomeScreen = ({ navigation }) => {
     <Container>
       <StatusBar barStyle="dark-content" />
       <SearchBar value="Search for a pick up game" />
-      <CustomMapView region={region} showsUserLocation={true}>
-        {
-          pickupGames.map(court => (
-            <Marker
-              key={court.id}
-              coordinate={court.coords}
-              title={court.name}
-              description={court.address}
-              onPress={() => navigation.navigate('Details', { id: court.id })}
-            />
-          ))
-        }
+      <CustomMapView region={region} showsUserLocation>
+        {pickupGames.map((court) => (
+          <Marker
+            key={court.id}
+            coordinate={court.coords}
+            title={court.name}
+            description={court.address}
+            onPress={() => navigation.navigate('Details', { id: court.id })}
+          />
+        ))}
       </CustomMapView>
       <Content>
         <CardsCarousel data={pickupGames} />

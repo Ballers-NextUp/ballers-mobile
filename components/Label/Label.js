@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
 const StyledLabel = styled.Text`
   margin-bottom: 8px;
@@ -8,7 +8,7 @@ const StyledLabel = styled.Text`
   text-transform: uppercase;
 `
 
-const Label = ({ children, text, ...rest}) => {
+const Label = ({ children, text, ...rest }) => {
   return (
     <StyledLabel {...rest}>
       {text}

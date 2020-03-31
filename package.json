@@ -6,10 +6,11 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "lint": "eslint --ext .js,.jsx .",
-    "lint:fix": "eslint --fix --ext .js,.jsx ."
+    "lint": "eslint --ext .js,.jsx . --ignore-pattern register-service-worker.js",
+    "lint:fix": "eslint --fix --ext .js,.jsx . --ignore-pattern register-service-worker.js"
   },
   "dependencies": {
+    "@expo/vector-icons": "^10.0.0",
     "@react-native-community/datetimepicker": "2.1.0",
     "@react-native-community/masked-view": "0.1.5",
     "@react-navigation/bottom-tabs": "^5.2.4",

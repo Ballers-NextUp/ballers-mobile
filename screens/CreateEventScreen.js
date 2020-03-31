@@ -1,11 +1,10 @@
 import React, { useState, useLayoutEffect } from 'react'
-import { ScrollView, KeyboardAvoidingView, Button, Image } from 'react-native'
+import { ScrollView, KeyboardAvoidingView, Button } from 'react-native'
 import styled from 'styled-components/native'
-import { Container, FormField, ActionsBarButton } from '../components'
 import { LinearGradient } from 'expo-linear-gradient'
 import * as ImagePicker from 'expo-image-picker'
-import Constants from 'expo-constants'
 import * as Permissions from 'expo-permissions'
+import { Container, FormField, ActionsBarButton } from '../components'
 
 const StyledImageUpload = styled.View`
   position: relative;
@@ -38,23 +37,24 @@ const gradientStyles = {
   right: 0,
   bottom: 0,
   height: '100%',
-  zIndex: 2
+  zIndex: 2,
 }
 
 const CreateEventScreen = ({ navigation }) => {
   const [inputs, setInputs] = useState({
-    eventName: "Baskeire",
-    place: "Rua Cariaçu, 120",
-    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    eventName: 'Baskeire',
+    place: 'Rua Cariaçu, 120',
+    description:
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
     starts: new Date(),
-    ends: new Date()
+    ends: new Date(),
   })
   const [image, setImage] = useState(null)
 
   const handleChange = (name, text) => {
     setInputs({
       ...inputs,
-      [name]: text
+      [name]: text,
     })
   }
 
@@ -63,11 +63,11 @@ const CreateEventScreen = ({ navigation }) => {
 
     if (status !== 'granted') return
 
-    let result = await ImagePicker.launchImageLibraryAsync({
+    const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
-      quality: 0.5
+      quality: 0.5,
     })
 
     setImage(result.uri)
@@ -75,33 +75,59 @@ const CreateEventScreen = ({ navigation }) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => (
-        <Button onPress={() => alert('Saved')} title="Save" />
-      ),
+      headerRight: () => <Button onPress={() => alert('Saved')} title="Save" />,
     })
   })
 
-  console.log(image)
-
   return (
-    <KeyboardAvoidingView style= {{ flex: 1 }} behavior= "padding">
-      <ScrollView contentContainerStyle={{ backgroundColor: '#fff'}}>
+    <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
+      <ScrollView contentContainerStyle={{ backgroundColor: '#fff' }}>
         <StyledImageUpload>
           <StyleImageContainer>
-            <ActionsBarButton iconName="camera" iconColor="#fff" onPress={chooseImage}></ActionsBarButton>
+            <ActionsBarButton
+              iconName="camera"
+              iconColor="#fff"
+              onPress={chooseImage}
+            />
           </StyleImageContainer>
-          { image && <StyledImage source={{ uri: image }} /> }
+          {image && <StyledImage source={{ uri: image }} />}
           <LinearGradient
-            colors={['transparent', 'rgba(0,0,0,0.8)' ]}
+            colors={['transparent', 'rgba(0,0,0,0.8)']}
             style={gradientStyles}
           />
         </StyledImageUpload>
         <Container>
-          <FormField label="Event Name" name="eventName" value={inputs.eventName} onChange={handleChange} />
-          <FormField label="Place" name="place" value={inputs.place} onChange={handleChange} />
-          <FormField label="Description" name="description" value={inputs.description} onChange={handleChange} multiline />
-          <FormField label="Starts" name="starts" value={inputs.starts} hasDatePicker />
-          <FormField label="Ends" name="ends" value={inputs.ends} hasDatePicker />
+          <FormField
+            label="Event Name"
+            name="eventName"
+            value={inputs.eventName}
+            onChange={handleChange}
+          />
+          <FormField
+            label="Place"
+            name="place"
+            value={inputs.place}
+            onChange={handleChange}
+          />
+          <FormField
+            label="Description"
+            name="description"
+            value={inputs.description}
+            onChange={handleChange}
+            multiline
+          />
+          <FormField
+            label="Starts"
+            name="starts"
+            value={inputs.starts}
+            hasDatePicker
+          />
+          <FormField
+            label="Ends"
+            name="ends"
+            value={inputs.ends}
+            hasDatePicker
+          />
         </Container>
       </ScrollView>
     </KeyboardAvoidingView>

@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text } from 'react-native'
 import styled from 'styled-components/native'
 import Carousel from 'react-native-snap-carousel'
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native'
 
 import { screenWidth } from '../../constants'
 
@@ -35,7 +35,7 @@ const Subtitle = styled.Text`
 `
 
 const StyledTime = styled.Text`
-  color: #EF4136;
+  color: #ef4136;
   font-weight: bold;
 `
 
@@ -64,7 +64,7 @@ const CardContainer = ({ item, index }) => {
   )
 }
 
-const CardsCarousel = ({data}) => {
+const CardsCarousel = ({ data }) => {
   return (
     <Carousel
       data={data}

@@ -1,9 +1,9 @@
 import React from 'react'
-import { View, StatusBar} from 'react-native'
+import { View, StatusBar } from 'react-native'
 import styled from 'styled-components/native'
 
 const StyledContainer = styled.View`
-  flex: 1
+  flex: 1;
 `
 
 const StyledHeader = styled.View`
@@ -61,10 +61,10 @@ const Title = styled.Text`
 
 const Paragraph = styled.Text`
   color: #666;
-  fontSize: 16px
+  fontsize: 16px;
 `
 
-const GetStartedScreen = ({navigation}) => {
+const GetStartedScreen = ({ navigation }) => {
   return (
     <StyledContainer>
       <StatusBar backgroundColor="#142133" barStyle="light-content" />
@@ -74,11 +74,15 @@ const GetStartedScreen = ({navigation}) => {
       <StyledContent>
         <View>
           <Title>Find a place to play</Title>
-          <Paragraph>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</Paragraph>
+          <Paragraph>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry.
+          </Paragraph>
         </View>
         <BrandButton
-          underlayColor='#C6392F'
-          onPress={() => navigation.navigate('Main')}>
+          underlayColor="#C6392F"
+          onPress={() => navigation.navigate('Main')}
+        >
           <BrandButtonText>Get Started</BrandButtonText>
         </BrandButton>
       </StyledContent>

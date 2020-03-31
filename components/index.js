@@ -20,5 +20,5 @@ export {
   ActionsBar,
   ActionsBarButton,
   LabeledInfo,
-  Avatar
+  Avatar,
 }
