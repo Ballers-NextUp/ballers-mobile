@@ -76,7 +76,7 @@ const HomeScreen = ({ navigation }) => {
   return (
     <Container>
       <StatusBar barStyle="dark-content" />
-      <SearchBar value="Search for a pick up game" />
+      <SearchBar placeholder="Search for a pick up game" />
       {region &&
         <CustomMapView region={region} showsUserLocation>
           {events.map((event) => (
