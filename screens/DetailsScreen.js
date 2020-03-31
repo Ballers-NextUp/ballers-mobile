@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components/native'
 import { ScrollView } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -71,7 +71,7 @@ const DetailsScreen = ({ navigation, route }) => {
             />
             <ActionsBarButton
               text="Editar"
-              onPress={() => navigation.navigate('Edit')}
+              onPress={() => navigation.navigate('Edit', { courtEvent })}
             />
           </ActionsBar>
         </HeaderActions>

@@ -1,6 +1,6 @@
 import GetStartedScreen from './GetStartedScreen'
 import HomeScreen from './HomeScreen'
 import DetailsScreen from './DetailsScreen'
-import CreateEventScreen from './CreateEventScreen'
+import EventFormScreen from './EventFormScreen'
 
-export { GetStartedScreen, HomeScreen, DetailsScreen, CreateEventScreen }
+export { GetStartedScreen, HomeScreen, DetailsScreen, EventFormScreen }

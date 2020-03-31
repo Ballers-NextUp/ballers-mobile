@@ -2,7 +2,7 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import MainTabNavigation from './MainTabNavigation'
-import { DetailsScreen, CreateEventScreen } from '../screens'
+import { DetailsScreen, EventFormScreen } from '../screens'
 
 const Stack = createStackNavigator()
 
@@ -20,7 +20,7 @@ const MainStackNavigation = () => (
     />
     <Stack.Screen
       name="Edit"
-      component={CreateEventScreen}
+      component={EventFormScreen}
       options={{ headerBackTitle: 'Back' }}
     />
   </Stack.Navigator>

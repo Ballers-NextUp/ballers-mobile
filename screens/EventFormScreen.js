@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from 'react'
+import React, { useState, useLayoutEffect, useEffect } from 'react'
 import { ScrollView, KeyboardAvoidingView, Button } from 'react-native'
 import styled from 'styled-components/native'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -40,16 +40,23 @@ const gradientStyles = {
   zIndex: 2,
 }
 
-const CreateEventScreen = ({ navigation }) => {
-  const [inputs, setInputs] = useState({
-    eventName: 'Baskeire',
-    place: 'Rua Cariaçu, 120',
-    description:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    starts: new Date(),
-    ends: new Date(),
-  })
-  const [image, setImage] = useState(null)
+const EventFormScreen = ({ navigation, route }) => {
+  const [inputs, setInputs] = useState({})
+
+  useEffect(() => {
+    if (!route.params || !route.params.courtEvent) return
+
+    const { courtEvent } = route.params
+
+    setInputs({
+      eventName: courtEvent.name,
+      place: courtEvent.address,
+      description: courtEvent.description,
+      eventImage: courtEvent.img_src,
+      starts: new Date(),
+      ends: new Date(),
+    })
+  }, [])
 
   const handleChange = (name, text) => {
     setInputs({
@@ -70,7 +77,7 @@ const CreateEventScreen = ({ navigation }) => {
       quality: 0.5,
     })
 
-    setImage(result.uri)
+    setInputs({ ...inputs, eventImage: result.uri })
   }
 
   useLayoutEffect(() => {
@@ -90,7 +97,9 @@ const CreateEventScreen = ({ navigation }) => {
               onPress={chooseImage}
             />
           </StyleImageContainer>
-          {image && <StyledImage source={{ uri: image }} />}
+          {inputs.eventImage && (
+            <StyledImage source={{ uri: inputs.eventImage }} />
+          )}
           <LinearGradient
             colors={['transparent', 'rgba(0,0,0,0.8)']}
             style={gradientStyles}
@@ -134,4 +143,4 @@ const CreateEventScreen = ({ navigation }) => {
   )
 }
 
-export default CreateEventScreen
+export default EventFormScreen
