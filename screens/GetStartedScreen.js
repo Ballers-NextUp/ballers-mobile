@@ -2,6 +2,8 @@ import React from 'react'
 import { View, StatusBar } from 'react-native'
 import styled from 'styled-components/native'
 
+const getStartedImage = require('../assets/onboarding-get-started.png')
+
 const StyledContainer = styled.View`
   flex: 1;
 `
@@ -69,7 +71,7 @@ const GetStartedScreen = ({ navigation }) => {
     <StyledContainer>
       <StatusBar backgroundColor="#142133" barStyle="light-content" />
       <StyledHeader>
-        <StyledImage source={require('../assets/onboarding-get-started.png')} />
+        <StyledImage source={getStartedImage} />
       </StyledHeader>
       <StyledContent>
         <View>
