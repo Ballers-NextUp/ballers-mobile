@@ -85,11 +85,7 @@ const Input = ({
     <View>
       {!hasDatePicker ? (
         <StyledTextInput
-          value={
-            hasDatePicker &&
-            inputValue instanceof Date &&
-            formatDateValue(inputValue)
-          }
+          value={inputValue}
           onFocus={handleFocus}
           onBlur={handleBlur}
           border={border}
