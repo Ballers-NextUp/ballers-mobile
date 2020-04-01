@@ -14,17 +14,9 @@ import {
 
 const Header = styled.View`
   width: 100%;
-  height: 320px;
+  height: 280px;
   flex-direction: column-reverse;
   background-color: rgba(0, 0, 0, 0.6);
-`
-
-const HeaderTitle = styled.Text`
-  position: absolute;
-  padding: 20px;
-  font-size: 20px;
-  color: #fff;
-  z-index: 1;
 `
 
 const Content = styled.View`
@@ -45,6 +37,10 @@ const HeaderActions = styled.View`
   z-index: 1;
 `
 
+const Row = styled.View`
+  flex-direction: row;
+`
+
 const gradientStyles = {
   position: 'absolute',
   left: 0,
@@ -61,7 +57,6 @@ const DetailsScreen = ({ navigation, route }) => {
   return (
     <ScrollView>
       <Header>
-        <HeaderTitle>{courtEvent.name}</HeaderTitle>
         <HeaderActions>
           <ActionsBar>
             <ActionsBarButton
@@ -84,13 +79,31 @@ const DetailsScreen = ({ navigation, route }) => {
         />
       </Header>
       <Content>
+        <LabeledInfo
+          label={courtEvent.name}
+          text={courtEvent.address}
+          labelSize="24px"
+          padded
+        />
+        <Row>
+          <LabeledInfo
+            label="Date"
+            text={courtEvent.datetime.date}
+            padded
+            style={{ width: '50%', marginRight: 20 }}
+          />
+          <LabeledInfo
+            label="Time"
+            text={`${courtEvent.datetime.starts} - ${courtEvent.datetime.ends}`}
+            style={{ width: '50%' }}
+            padded
+          />
+        </Row>
+        <LabeledInfo label="Description" text={courtEvent.description} padded />
         <LabeledInfo padded alignItems="center" flexDirection="row">
           <Avatar name={courtEvent.creator} />
           <LabeledInfo label={courtEvent.creator} text="Creator" />
         </LabeledInfo>
-        <LabeledInfo label="Place" text={courtEvent.address} padded />
-        <LabeledInfo label="Date and time" text={courtEvent.datetime} padded />
-        <LabeledInfo label="Description" text={courtEvent.description} padded />
       </Content>
     </ScrollView>
   )

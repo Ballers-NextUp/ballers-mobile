@@ -2,13 +2,13 @@ import React from 'react'
 import styled from 'styled-components/native'
 
 const Field = styled.View`
-  padding-vertical: ${(props) => (props.padded ? '10px' : 0)};
+  padding-vertical: ${(props) => (props.padded ? '16px' : 0)};
   align-items: ${({ alignItems }) => alignItems || 'flex-start'};
   flex-direction: ${({ flexDirection }) => flexDirection || 'column'};
 `
 
 const FieldLabel = styled.Text`
-  font-size: 16px;
+  font-size: ${({ labelSize }) => labelSize || '16px'};
   font-weight: bold;
   margin-bottom: 2px;
 `
@@ -25,18 +25,21 @@ const LabeledInfo = ({
   padded,
   alignItems,
   flexDirection,
+  labelSize,
+  ...rest
 }) => {
   return children ? (
     <Field
       padded={padded}
       alignItems={alignItems}
       flexDirection={flexDirection}
+      {...rest}
     >
       {children}
     </Field>
   ) : (
-    <Field padded={padded}>
-      <FieldLabel>{label}</FieldLabel>
+    <Field padded={padded} {...rest}>
+      <FieldLabel labelSize={labelSize}>{label}</FieldLabel>
       <FieldText>{text}</FieldText>
     </Field>
   )
