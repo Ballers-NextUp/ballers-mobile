@@ -1,12 +1,12 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 
-import MainTabNavigation from './navigations/MainTabNavigation'
+import MainStackNavigation from './navigations/MainStackNavigation'
 
 const App = () => {
   return (
     <NavigationContainer>
-      <MainTabNavigation />
+      <MainStackNavigation />
     </NavigationContainer>
   )
 }

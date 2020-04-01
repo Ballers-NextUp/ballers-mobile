@@ -1,26 +1,22 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 
-import { HomeScreen, DetailsScreen, EventFormScreen } from '../screens'
+import MainTabNavigation from './MainTabNavigation'
+import AuthStackNavigation from './AuthStackNavigation'
 
 const Stack = createStackNavigator()
 
 const MainStackNavigation = () => (
   <Stack.Navigator>
     <Stack.Screen
-      name="Main"
-      component={HomeScreen}
+      name="Auth"
+      component={AuthStackNavigation}
       options={{ headerShown: false }}
     />
     <Stack.Screen
-      name="Details"
-      component={DetailsScreen}
+      name="App"
+      component={MainTabNavigation}
       options={{ headerShown: false }}
-    />
-    <Stack.Screen
-      name="Edit"
-      component={EventFormScreen}
-      options={{ headerBackTitle: 'Back' }}
     />
   </Stack.Navigator>
 )

@@ -1,4 +1,4 @@
-import Input from './Input'
+import Input, { BorderedInput } from './Input'
 import Container from './Container'
 import Label from './Label'
 import FormField from './FormField'
@@ -11,6 +11,7 @@ import Avatar from './Avatar'
 
 export {
   Input,
+  BorderedInput,
   Container,
   Label,
   FormField,
