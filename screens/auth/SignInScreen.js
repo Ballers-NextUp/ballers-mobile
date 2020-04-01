@@ -35,8 +35,16 @@ const SignInScreen = ({ navigation }) => {
       title="Hello There"
       subtitle="Find pick up basketball near you"
     >
-      <BorderedInput placeholder="E-mail" style={{ marginBottom: 20 }} />
-      <BorderedInput placeholder="Password" />
+      <BorderedInput
+        placeholder="E-mail"
+        textContentType="username"
+        style={{ marginBottom: 20 }}
+      />
+      <BorderedInput
+        placeholder="Password"
+        textContentType="password"
+        secureTextEntry
+      />
       <TouchableOpacity onPress={() => navigation.navigate('Forgot Password')}>
         <StyledForgotPasswordText>Forgot password ?</StyledForgotPasswordText>
       </TouchableOpacity>

@@ -12,8 +12,17 @@ const SignUpScreen = () => {
     >
       <BorderedInput placeholder="Name" style={{ marginBottom: 20 }} />
       <BorderedInput placeholder="E-mail" style={{ marginBottom: 20 }} />
-      <BorderedInput placeholder="Password" style={{ marginBottom: 20 }} />
-      <BorderedInput placeholder="Confirm Password" />
+      <BorderedInput
+        placeholder="Password"
+        textContentType="password"
+        style={{ marginBottom: 20 }}
+        secureTextEntry
+      />
+      <BorderedInput
+        placeholder="Confirm Password"
+        textContentType="password"
+        secureTextEntry
+      />
       <BrandButton title="Sign Up" style={{ marginTop: 32 }} />
     </AuthScreenContainer>
   )
