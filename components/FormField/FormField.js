@@ -4,12 +4,12 @@ import styled from 'styled-components'
 import Input from '../Input'
 import Label from '../Label'
 
-const StyleField = styled.View`
+const StyledFormField = styled.View`
   display: flex;
   margin-bottom: 32px;
 `
 
-const Field = ({
+const FormField = ({
   label,
   value,
   onChange,
@@ -18,10 +18,12 @@ const Field = ({
   multiline,
   name,
   hasDatePicker,
+  placeholder,
+  datePickerMode,
   ...rest
 }) => {
   return (
-    <StyleField {...rest}>
+    <StyledFormField {...rest}>
       <Label text={label} />
       <Input
         name={name}
@@ -30,10 +32,12 @@ const Field = ({
         onFocus={onFocus}
         onChange={onChange}
         multiline={multiline}
+        datePickerMode={datePickerMode}
+        placeholder={placeholder}
         hasDatePicker={hasDatePicker}
       />
-    </StyleField>
+    </StyledFormField>
   )
 }
 
-export default Field
+export default FormField

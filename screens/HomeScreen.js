@@ -77,7 +77,7 @@ const HomeScreen = ({ navigation }) => {
     <Container>
       <StatusBar barStyle="dark-content" />
       <SearchBar placeholder="Search for a pick up game" />
-      {region &&
+      {region && (
         <CustomMapView region={region} showsUserLocation>
           {events.map((event) => (
             <Marker
@@ -89,7 +89,7 @@ const HomeScreen = ({ navigation }) => {
             />
           ))}
         </CustomMapView>
-      }
+      )}
       <Content>
         <CardsCarousel data={events} />
       </Content>

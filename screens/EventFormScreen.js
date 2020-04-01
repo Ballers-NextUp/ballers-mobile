@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect, useEffect } from 'react'
-import { ScrollView, KeyboardAvoidingView, Button } from 'react-native'
+import { ScrollView, KeyboardAvoidingView, Button, View } from 'react-native'
 import styled from 'styled-components/native'
 import { LinearGradient } from 'expo-linear-gradient'
 import * as ImagePicker from 'expo-image-picker'
@@ -41,7 +41,15 @@ const gradientStyles = {
 }
 
 const EventFormScreen = ({ navigation, route }) => {
-  const [inputs, setInputs] = useState({})
+  const [inputs, setInputs] = useState({
+    eventName: '',
+    place: '',
+    description: '',
+    eventImage: null,
+    date: new Date(),
+    starts: new Date(),
+    ends: new Date(),
+  })
 
   useEffect(() => {
     if (!route.params || !route.params.courtEvent) return
@@ -53,6 +61,7 @@ const EventFormScreen = ({ navigation, route }) => {
       place: courtEvent.address,
       description: courtEvent.description,
       eventImage: courtEvent.img_src,
+      date: new Date(),
       starts: new Date(),
       ends: new Date(),
     })
@@ -109,12 +118,14 @@ const EventFormScreen = ({ navigation, route }) => {
           <FormField
             label="Event Name"
             name="eventName"
+            placeholder="Add an event name"
             value={inputs.eventName}
             onChange={handleChange}
           />
           <FormField
-            label="Place"
-            name="place"
+            label="Adress"
+            name="Adress"
+            placeholder="Add an address"
             value={inputs.place}
             onChange={handleChange}
           />
@@ -122,21 +133,39 @@ const EventFormScreen = ({ navigation, route }) => {
             label="Description"
             name="description"
             value={inputs.description}
+            placeholder="Write something about the event"
             onChange={handleChange}
             multiline
           />
           <FormField
-            label="Starts"
-            name="starts"
-            value={inputs.starts}
+            label="Date"
+            name="description"
+            value={inputs.date}
             hasDatePicker
+            datePickerMode="date"
+            onChange={handleChange}
+            multiline
           />
-          <FormField
-            label="Ends"
-            name="ends"
-            value={inputs.ends}
-            hasDatePicker
-          />
+          <View style={{ flexDirection: 'row' }}>
+            <View style={{ width: '50%', paddingRight: 10 }}>
+              <FormField
+                label="Starts"
+                name="starts"
+                value={inputs.starts}
+                hasDatePicker
+                datePickerMode="time"
+              />
+            </View>
+            <View style={{ width: '50%', paddingLeft: 10 }}>
+              <FormField
+                label="Ends"
+                name="ends"
+                value={inputs.ends}
+                hasDatePicker
+                datePickerMode="time"
+              />
+            </View>
+          </View>
         </Container>
       </ScrollView>
     </KeyboardAvoidingView>
