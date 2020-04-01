@@ -1,8 +1,8 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import styled from 'styled-components/native'
 
-import { LabeledInfo, BorderedInput } from '../../components'
+import { LabeledInfo, BorderedInput, BrandButton } from '../../components'
 
 const appIcon = require('../../assets/ballers-icon.png')
 
@@ -15,26 +15,6 @@ const StyleAppIcon = styled.Image`
   width: 37px;
   height: 50px;
   margin-bottom: 32px;
-`
-
-const BrandButton = styled.TouchableHighlight`
-  width: 100%;
-  align-items: center;
-  padding-vertical: 16px;
-  padding-horizontal: 64px;
-  border-radius: 500px;
-  background-color: #EF4136;
-  shadow-opacity: 0.45;
-  shadow-radius: 5px;
-  shadow-color: #FF6347;
-  shadow-offset: { height: 5px, width: 0 };
-  align-self: flex-end;
-`
-
-const BrandButtonText = styled.Text`
-  font-size: 16px;
-  text-transform: uppercase;
-  color: #fff;
 `
 
 const SignInScreen = () => {
@@ -50,9 +30,7 @@ const SignInScreen = () => {
         />
         <BorderedInput placeholder="E-mail" style={{ marginBottom: 20 }} />
         <BorderedInput placeholder="Password" />
-        <BrandButton underlayColor="#C6392F" style={{ marginTop: 32 }}>
-          <BrandButtonText>Sign In</BrandButtonText>
-        </BrandButton>
+        <BrandButton title="Sign In" style={{ marginTop: 32 }} />
       </StyledContent>
     </View>
   )

@@ -8,6 +8,7 @@ import CustomMapView from './CustomMapView'
 import { ActionsBar, ActionsBarButton } from './ActionsBar'
 import LabeledInfo from './LabeledInfo'
 import Avatar from './Avatar'
+import BrandButton from './BrandButton'
 
 export {
   Input,
@@ -22,4 +23,5 @@ export {
   ActionsBarButton,
   LabeledInfo,
   Avatar,
+  BrandButton
 }
