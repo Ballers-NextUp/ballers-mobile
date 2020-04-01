@@ -1,11 +1,21 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+
+import AuthScreenContainer from './AuthScreenContainer'
+import { BorderedInput, BrandButton } from '../../components'
 
 const SignUpScreen = () => {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Sign up screen</Text>
-    </View>
+    <AuthScreenContainer
+      title="Create an Account"
+      subtitle="Fill your data to create an account"
+      hasBackButton
+    >
+      <BorderedInput placeholder="Name" style={{ marginBottom: 20 }} />
+      <BorderedInput placeholder="E-mail" style={{ marginBottom: 20 }} />
+      <BorderedInput placeholder="Password" style={{ marginBottom: 20 }} />
+      <BorderedInput placeholder="Confirm Password" />
+      <BrandButton title="Sign Up" style={{ marginTop: 32 }} />
+    </AuthScreenContainer>
   )
 }
 

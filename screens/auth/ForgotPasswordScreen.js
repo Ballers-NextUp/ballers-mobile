@@ -1,11 +1,17 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import AuthScreenContainer from './AuthScreenContainer'
+import { BorderedInput, BrandButton } from '../../components'
 
 const ForgotPasswordScreen = () => {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Forgot password</Text>
-    </View>
+    <AuthScreenContainer
+      title="Forgot Password ?"
+      subtitle="Fill your data to retrive your password"
+      hasBackButton
+    >
+      <BorderedInput placeholder="E-mail" style={{ marginBottom: 20 }} />
+      <BrandButton title="Submit" style={{ marginTop: 32 }} />
+    </AuthScreenContainer>
   )
 }
 

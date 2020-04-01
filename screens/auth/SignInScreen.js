@@ -1,38 +1,53 @@
 import React from 'react'
-import { View } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 
-import { LabeledInfo, BorderedInput, BrandButton } from '../../components'
+import { BorderedInput, BrandButton } from '../../components'
+import AuthScreenContainer from './AuthScreenContainer'
 
-const appIcon = require('../../assets/ballers-icon.png')
-
-const StyledContent = styled.View`
+const StyledFooter = styled.View`
+  flex-direction: row;
   width: 100%;
-  padding: 32px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 32px;
 `
 
-const StyleAppIcon = styled.Image`
-  width: 37px;
-  height: 50px;
-  margin-bottom: 32px;
+const StyledFooterText = styled.Text`
+  color: #666;
 `
 
-const SignInScreen = () => {
+const StyledFooterButtonText = styled.Text`
+  color: #ef4136;
+  font-weight: bold;
+`
+
+const StyledForgotPasswordText = styled.Text`
+  color: #666;
+  margin-top: 16px;
+  text-align: right;
+  text-decoration: underline;
+`
+
+const SignInScreen = ({ navigation }) => {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <StyledContent>
-        <StyleAppIcon source={appIcon} />
-        <LabeledInfo
-          labelSize={24}
-          label="Hello There"
-          text="Find pick up basketballs near you"
-          style={{ marginBottom: 32 }}
-        />
-        <BorderedInput placeholder="E-mail" style={{ marginBottom: 20 }} />
-        <BorderedInput placeholder="Password" />
-        <BrandButton title="Sign In" style={{ marginTop: 32 }} />
-      </StyledContent>
-    </View>
+    <AuthScreenContainer
+      title="Hello There"
+      subtitle="Find pick up basketball near you"
+    >
+      <BorderedInput placeholder="E-mail" style={{ marginBottom: 20 }} />
+      <BorderedInput placeholder="Password" />
+      <TouchableOpacity onPress={() => navigation.navigate('Forgot Password')}>
+        <StyledForgotPasswordText>Forgot password ?</StyledForgotPasswordText>
+      </TouchableOpacity>
+      <BrandButton title="Sign In" style={{ marginTop: 32 }} />
+      <StyledFooter>
+        <StyledFooterText>Are you new ?&nbsp;</StyledFooterText>
+        <TouchableOpacity onPress={() => navigation.navigate('Sign Up')}>
+          <StyledFooterButtonText>Sign Up</StyledFooterButtonText>
+        </TouchableOpacity>
+      </StyledFooter>
+    </AuthScreenContainer>
   )
 }
 
