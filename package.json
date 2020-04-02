@@ -6,8 +6,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "lint": "eslint --ext .js,.jsx . --ignore-pattern register-service-worker.js",
-    "lint:fix": "eslint --fix --ext .js,.jsx . --ignore-pattern register-service-worker.js"
+    "lint": "eslint --ext .js,.jsx . --ignore-pattern register-service-worker.js --ignore-pattern environment.js",
+    "lint:fix": "eslint --fix --ext .js,.jsx . --ignore-pattern register-service-worker.js --ignore-pattern environment.js"
   },
   "dependencies": {
     "@expo/vector-icons": "^10.0.0",
