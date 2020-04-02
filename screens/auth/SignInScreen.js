@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
+import { showMessage } from 'react-native-flash-message'
+
+import { signIn } from '../../service'
 
 import { BorderedInput, BrandButton } from '../../components'
 import AuthScreenContainer from './AuthScreenContainer'
@@ -30,17 +33,46 @@ const StyledForgotPasswordText = styled.Text`
 `
 
 const SignInScreen = ({ navigation }) => {
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+  })
+
+  const handleSignIn = async () => {
+    const { email, password } = user
+    const message = await signIn(email, password)
+
+    if (message.type === 'error') {
+      showMessage({
+        message: 'An error ocurred',
+        description: message.description,
+        type: message.type,
+      })
+    }
+  }
+
+  const handleChange = (name, value) => {
+    setUser({ ...user, [name]: value })
+  }
+
   return (
     <AuthScreenContainer
       title="Hello There"
       subtitle="Find pick up basketball near you"
     >
       <BorderedInput
+        value={user.email}
+        name="email"
         placeholder="E-mail"
+        onChange={handleChange}
         textContentType="username"
+        keyboardType="email-address"
         style={{ marginBottom: 20 }}
       />
       <BorderedInput
+        name="password"
+        value={user.password}
+        onChange={handleChange}
         placeholder="Password"
         textContentType="password"
         secureTextEntry
@@ -48,7 +80,11 @@ const SignInScreen = ({ navigation }) => {
       <TouchableOpacity onPress={() => navigation.navigate('Forgot Password')}>
         <StyledForgotPasswordText>Forgot password ?</StyledForgotPasswordText>
       </TouchableOpacity>
-      <BrandButton title="Sign In" style={{ marginTop: 32 }} />
+      <BrandButton
+        title="Sign In"
+        style={{ marginTop: 32 }}
+        onPress={handleSignIn}
+      />
       <StyledFooter>
         <StyledFooterText>Are you new ?&nbsp;</StyledFooterText>
         <TouchableOpacity onPress={() => navigation.navigate('Sign Up')}>
