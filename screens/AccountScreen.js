@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Button } from 'react-native'
-import firebase from '../service'
+import firebase from '../auth'
 
 const AccountScreen = () => {
   const signOut = () => {

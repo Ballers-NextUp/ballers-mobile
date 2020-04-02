@@ -3,7 +3,7 @@ import { TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 import { showMessage } from 'react-native-flash-message'
 
-import { signIn } from '../../service'
+import { signIn } from '../../auth'
 
 import { BorderedInput, BrandButton } from '../../components'
 import AuthScreenContainer from './AuthScreenContainer'

@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import MainTabNavigation from './MainTabNavigation'
 import AuthStackNavigation from './AuthStackNavigation'
-import firebase from '../service'
+import firebase from '../auth'
 
 const Stack = createStackNavigator()
 

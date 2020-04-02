@@ -4,7 +4,7 @@ import { showMessage } from 'react-native-flash-message'
 import AuthScreenContainer from './AuthScreenContainer'
 import { BorderedInput, BrandButton } from '../../components'
 
-import { signUp } from '../../service'
+import { signUp } from '../../auth'
 
 const SignUpScreen = () => {
   const [user, setUser] = useState({

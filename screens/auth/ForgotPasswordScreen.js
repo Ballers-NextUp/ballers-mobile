@@ -3,7 +3,7 @@ import { showMessage } from 'react-native-flash-message'
 
 import AuthScreenContainer from './AuthScreenContainer'
 import { BorderedInput, BrandButton } from '../../components'
-import { forgotPassword } from '../../service'
+import { forgotPassword } from '../../auth'
 
 const ForgotPasswordScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
