@@ -81,6 +81,7 @@ const SignInScreen = ({ navigation }) => {
         <StyledForgotPasswordText>Forgot password ?</StyledForgotPasswordText>
       </TouchableOpacity>
       <BrandButton
+        disabled={user.email === '' && user.password === ''}
         title="Sign In"
         style={{ marginTop: 32 }}
         onPress={handleSignIn}
