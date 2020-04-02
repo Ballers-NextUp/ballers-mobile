@@ -10,6 +10,7 @@ const auth = firebase.auth()
 const signUp = async (email, password) => {
   let message = {
     type: '',
+    title: '',
     description: '',
   }
 
@@ -18,11 +19,13 @@ const signUp = async (email, password) => {
 
     message = {
       type: 'success',
+      title: 'Success',
       description: 'Account created with success',
     }
   } catch (error) {
     message = {
       type: 'error',
+      title: 'An error ocurred',
       description: error.message,
     }
   }
