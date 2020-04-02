@@ -13,6 +13,7 @@ const StyledBrandButton = styled.TouchableHighlight`
   shadow-color: #FF6347;
   shadow-offset: { height: 5px, width: 0 };
   align-self: flex-end;
+  opacity: ${({ disabled }) => (disabled ? 0.75 : 1)};
 `
 
 const StyledBrandButtonText = styled.Text`
@@ -21,9 +22,9 @@ const StyledBrandButtonText = styled.Text`
   color: #fff;
 `
 
-const BrandButton = ({ title, ...rest }) => {
+const BrandButton = ({ title, disabled, ...rest }) => {
   return (
-    <StyledBrandButton underlayColor="#C6392F" {...rest}>
+    <StyledBrandButton underlayColor="#C6392F" disabled={disabled} {...rest}>
       <StyledBrandButtonText>{title}</StyledBrandButtonText>
     </StyledBrandButton>
   )
