@@ -59,6 +59,32 @@ const signIn = async (email, password) => {
   return response
 }
 
+const forgotPassword = async (email) => {
+  let response = {
+    type: '',
+    title: '',
+    description: '',
+  }
+
+  try {
+    await auth.sendPasswordResetEmail(email)
+
+    response = {
+      type: 'success',
+      title: 'Success',
+      description: 'Email sent with success',
+    }
+  } catch (error) {
+    response = {
+      type: 'error',
+      title: 'An error ocurred',
+      description: error.message,
+    }
+  }
+
+  return response
+}
+
 export default firebase
 
-export { signUp, signIn }
+export { signUp, signIn, forgotPassword }
