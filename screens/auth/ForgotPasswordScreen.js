@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { showMessage } from 'react-native-flash-message'
 
 import AuthScreenContainer from './AuthScreenContainer'
-import { BorderedInput, BrandButton } from '../../components'
+import { BorderedInput, RoundedButton } from '../../components'
 import { forgotPassword } from '../../auth'
 
 const ForgotPasswordScreen = ({ navigation }) => {
@@ -39,7 +39,8 @@ const ForgotPasswordScreen = ({ navigation }) => {
         style={{ marginBottom: 20 }}
         keyboardType="email-address"
       />
-      <BrandButton
+      <RoundedButton
+        type="brand"
         disabled={email === ''}
         title="Submit"
         style={{ marginTop: 32 }}

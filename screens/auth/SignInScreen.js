@@ -2,13 +2,16 @@ import React, { useState } from 'react'
 import { TouchableOpacity } from 'react-native'
 import styled from 'styled-components/native'
 import { showMessage } from 'react-native-flash-message'
+import { AntDesign } from '@expo/vector-icons'
 
-import { signIn } from '../../auth'
+import { signIn, signInWithGoogleAsync } from '../../auth'
 
-import { BorderedInput, BrandButton } from '../../components'
+import { BorderedInput, RoundedButton } from '../../components'
 import AuthScreenContainer from './AuthScreenContainer'
 
 const StyledFooter = styled.View`
+  position: absolute;
+  bottom: 16px;
   flex-direction: row;
   width: 100%;
   align-items: center;
@@ -57,44 +60,60 @@ const SignInScreen = ({ navigation }) => {
     setUser({ ...user, [name]: value })
   }
 
+  const handleSignInWithProvider = async () => {
+    await signInWithGoogleAsync()
+  }
+
   return (
-    <AuthScreenContainer
-      title="Hello There"
-      subtitle="Find pick up basketball near you"
-    >
-      <BorderedInput
-        value={user.email}
-        name="email"
-        placeholder="E-mail"
-        onChange={handleChange}
-        textContentType="username"
-        keyboardType="email-address"
-        style={{ marginBottom: 20 }}
-      />
-      <BorderedInput
-        name="password"
-        value={user.password}
-        onChange={handleChange}
-        placeholder="Password"
-        textContentType="password"
-        secureTextEntry
-      />
-      <TouchableOpacity onPress={() => navigation.navigate('Forgot Password')}>
-        <StyledForgotPasswordText>Forgot password ?</StyledForgotPasswordText>
-      </TouchableOpacity>
-      <BrandButton
-        disabled={user.email === '' || user.password === ''}
-        title="Sign In"
-        style={{ marginTop: 32 }}
-        onPress={handleSignIn}
-      />
+    <>
+      <AuthScreenContainer
+        title="Hello There"
+        subtitle="Find pick up basketball near you"
+      >
+        <BorderedInput
+          value={user.email}
+          name="email"
+          placeholder="E-mail"
+          onChange={handleChange}
+          textContentType="username"
+          keyboardType="email-address"
+          style={{ marginBottom: 20 }}
+        />
+        <BorderedInput
+          name="password"
+          value={user.password}
+          onChange={handleChange}
+          placeholder="Password"
+          textContentType="password"
+          secureTextEntry
+        />
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Forgot Password')}
+        >
+          <StyledForgotPasswordText>Forgot password ?</StyledForgotPasswordText>
+        </TouchableOpacity>
+        <RoundedButton
+          type="brand"
+          disabled={user.email === '' || user.password === ''}
+          title="Sign In"
+          style={{ marginTop: 32 }}
+          onPress={handleSignIn}
+        />
+        <RoundedButton
+          type="phantom"
+          icon={<AntDesign name="google" size={20} color="#666" />}
+          title="Continue with Google"
+          style={{ marginTop: 12 }}
+          onPress={handleSignInWithProvider}
+        />
+      </AuthScreenContainer>
       <StyledFooter>
         <StyledFooterText>Are you new ?&nbsp;</StyledFooterText>
         <TouchableOpacity onPress={() => navigation.navigate('Sign Up')}>
           <StyledFooterButtonText>Sign Up</StyledFooterButtonText>
         </TouchableOpacity>
       </StyledFooter>
-    </AuthScreenContainer>
+    </>
   )
 }
 

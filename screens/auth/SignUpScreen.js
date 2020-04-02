@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { showMessage } from 'react-native-flash-message'
 
 import AuthScreenContainer from './AuthScreenContainer'
-import { BorderedInput, BrandButton } from '../../components'
+import { BorderedInput, RoundedButton } from '../../components'
 
 import { signUp } from '../../auth'
 
@@ -71,7 +71,8 @@ const SignUpScreen = () => {
         textContentType="password"
         secureTextEntry
       />
-      <BrandButton
+      <RoundedButton
+        type="brand"
         disabled={
           user.email === '' ||
           user.password === '' ||
