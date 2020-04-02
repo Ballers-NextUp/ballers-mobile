@@ -52,6 +52,7 @@ const SignUpScreen = () => {
         onChange={handleChange}
         placeholder="E-mail"
         style={{ marginBottom: 20 }}
+        keyboardType="email-address"
       />
       <BorderedInput
         name="password"

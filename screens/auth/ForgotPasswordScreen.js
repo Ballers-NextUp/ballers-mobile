@@ -37,6 +37,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
         onChange={handleChange}
         placeholder="E-mail"
         style={{ marginBottom: 20 }}
+        keyboardType="email-address"
       />
       <BrandButton
         disabled={email === ''}
