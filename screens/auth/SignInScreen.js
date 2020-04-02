@@ -40,15 +40,17 @@ const SignInScreen = ({ navigation }) => {
 
   const handleSignIn = async () => {
     const { email, password } = user
-    const message = await signIn(email, password)
+    const response = await signIn(email, password)
 
-    if (message.type === 'error') {
-      showMessage({
-        message: 'An error ocurred',
-        description: message.description,
-        type: message.type,
-      })
-    }
+    if (response.type !== 'error') return false
+
+    const { title, description, type } = response
+
+    return showMessage({
+      message: title,
+      description,
+      type,
+    })
   }
 
   const handleChange = (name, value) => {
@@ -81,7 +83,7 @@ const SignInScreen = ({ navigation }) => {
         <StyledForgotPasswordText>Forgot password ?</StyledForgotPasswordText>
       </TouchableOpacity>
       <BrandButton
-        disabled={user.email === '' && user.password === ''}
+        disabled={user.email === '' || user.password === ''}
         title="Sign In"
         style={{ marginTop: 32 }}
         onPress={handleSignIn}

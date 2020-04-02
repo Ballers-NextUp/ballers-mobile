@@ -72,8 +72,8 @@ const SignUpScreen = () => {
       />
       <BrandButton
         disabled={
-          user.email === '' &&
-          user.password === '' &&
+          user.email === '' ||
+          user.password === '' ||
           user.confirmPassword === ''
         }
         title="Sign Up"

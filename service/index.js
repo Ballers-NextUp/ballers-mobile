@@ -8,7 +8,7 @@ if (!firebase.apps.length) {
 const auth = firebase.auth()
 
 const signUp = async (email, password) => {
-  let message = {
+  let response = {
     type: '',
     title: '',
     description: '',
@@ -17,43 +17,46 @@ const signUp = async (email, password) => {
   try {
     await auth.createUserWithEmailAndPassword(email, password)
 
-    message = {
+    response = {
       type: 'success',
       title: 'Success',
       description: 'Account created with success',
     }
   } catch (error) {
-    message = {
+    response = {
       type: 'error',
       title: 'An error ocurred',
       description: error.message,
     }
   }
 
-  return message
+  return response
 }
 
 const signIn = async (email, password) => {
-  let message = {
+  let response = {
     type: '',
+    title: '',
     description: '',
   }
 
   try {
     await auth.signInWithEmailAndPassword(email, password)
 
-    message = {
+    response = {
       type: 'success',
+      title: 'Success',
       description: 'Logged in with success',
     }
   } catch (error) {
-    message = {
+    response = {
       type: 'error',
+      title: 'An error ocurred',
       description: error.message,
     }
   }
 
-  return message
+  return response
 }
 
 export default firebase
