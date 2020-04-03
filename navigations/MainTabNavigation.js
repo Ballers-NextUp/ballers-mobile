@@ -1,8 +1,9 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Feather } from '@expo/vector-icons'
-import MainStackNavigation from './MainStackNavigation'
+import HomeStackNavigation from './HomeStackNavigation'
 import NewStackNavigation from './NewStackNavigation'
+import { AccountScreen } from '../screens'
 
 const Tab = createBottomTabNavigator()
 
@@ -12,6 +13,7 @@ const setScreenOptions = ({ route }) => ({
 
     if (route.name === 'Home') iconName = 'home'
     if (route.name === 'New') iconName = 'plus-circle'
+    if (route.name === 'Account') iconName = 'user'
 
     return <Feather name={iconName} size={size} color={color} />
   },
@@ -28,8 +30,9 @@ const MainTabNavigation = () => {
       screenOptions={setScreenOptions}
       tabBarOptions={tabBarOptions}
     >
-      <Tab.Screen name="Home" component={MainStackNavigation} />
+      <Tab.Screen name="Home" component={HomeStackNavigation} />
       <Tab.Screen name="New" component={NewStackNavigation} />
+      <Tab.Screen name="Account" component={AccountScreen} />
     </Tab.Navigator>
   )
 }

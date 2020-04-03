@@ -1,12 +1,14 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
+import FlashMessage from 'react-native-flash-message'
 
-import MainTabNavigation from './navigations/MainTabNavigation'
+import MainStackNavigation from './navigations/MainStackNavigation'
 
 const App = () => {
   return (
     <NavigationContainer>
-      <MainTabNavigation />
+      <MainStackNavigation />
+      <FlashMessage position="bottom" />
     </NavigationContainer>
   )
 }

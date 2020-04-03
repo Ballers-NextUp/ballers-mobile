@@ -5,25 +5,26 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import moment from 'moment'
 
 const StyledTextInput = styled.TextInput`
-  padding: 8px 4px;
+  padding: 16px 12px;
   font-size: 16px;
-  border-bottom-width: ${(props) => props.border.width};
+  border-width: 1px;
   border-style: solid
-  border-bottom-color: ${(props) => props.border.color};
+  border-color: ${(props) => props.border.color};
+  border-radius: 4px;
 `
 
 const StyledDatepickerButton = styled.TouchableOpacity`
-  padding: 8px 4px;
+  padding: 12px 8px;
   text-align: left;
-  border-bottom-width: 1px;
-  border-bottom-color: #ddd;
+  border-width: 1px;
+  border-color: #ddd;
 `
 
 const StyledDatepickerButtonText = styled.Text`
   font-size: 16px;
 `
 
-const Input = ({
+const BorderedInput = ({
   value,
   name,
   onChange,
@@ -39,12 +40,12 @@ const Input = ({
   const [border, setBorder] = useState({ color: '#ddd', width: '1px' })
 
   const handleFocus = () => {
-    setBorder({ width: '2px', color: '#4285f4' })
+    setBorder({ color: '#4285f4' })
     if (onFocus) onFocus()
   }
 
   const handleBlur = () => {
-    setBorder({ width: '1px', color: '#ddd' })
+    setBorder({ color: '#ddd' })
     if (onBlur) onBlur()
   }
 
@@ -107,6 +108,7 @@ const Input = ({
             onConfirm={handleDate}
             onCancel={hideDatepicker}
             isVisible={datePickerVisibility}
+            isDarkModeEnabled
           />
         </>
       )}
@@ -114,4 +116,4 @@ const Input = ({
   )
 }
 
-export default Input
+export default BorderedInput
