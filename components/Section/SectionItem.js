@@ -3,9 +3,7 @@ import styled from 'styled-components/native'
 import { Feather } from '@expo/vector-icons'
 
 const StyledSectionItem = styled.TouchableHighlight`
-  padding: 20px 0;
-  margin-left: 20px;
-  margin-right: 20px;
+  padding: 20px;
   ${({ first }) =>
     !first &&
     `
