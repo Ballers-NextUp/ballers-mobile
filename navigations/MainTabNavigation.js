@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Feather } from '@expo/vector-icons'
 import HomeStackNavigation from './HomeStackNavigation'
 import NewStackNavigation from './NewStackNavigation'
-import { AccountScreen } from '../screens'
+import AccountStackNavigation from './AccountStackNavigation'
 
 const Tab = createBottomTabNavigator()
 
@@ -32,7 +32,7 @@ const MainTabNavigation = () => {
     >
       <Tab.Screen name="Home" component={HomeStackNavigation} />
       <Tab.Screen name="New" component={NewStackNavigation} />
-      <Tab.Screen name="Account" component={AccountScreen} />
+      <Tab.Screen name="Account" component={AccountStackNavigation} />
     </Tab.Navigator>
   )
 }
