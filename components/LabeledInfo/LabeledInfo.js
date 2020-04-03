@@ -39,8 +39,8 @@ const LabeledInfo = ({
     </Field>
   ) : (
     <Field padded={padded} {...rest}>
-      <FieldLabel labelSize={labelSize}>{label}</FieldLabel>
-      <FieldText>{text}</FieldText>
+      {label && <FieldLabel labelSize={labelSize}>{label}</FieldLabel>}
+      {text && <FieldText>{text}</FieldText>}
     </Field>
   )
 }

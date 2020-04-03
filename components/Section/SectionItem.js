@@ -43,6 +43,7 @@ const SectionItem = ({
   iconName,
   children,
   first,
+  hideRightIcon,
   ...rest
 }) => {
   return (
@@ -58,9 +59,11 @@ const SectionItem = ({
             </StyledSectionItemContent>
           </>
         )}
-        <StyledSectionRightIcon>
-          <Feather name="chevron-right" size={20} color="#999" />
-        </StyledSectionRightIcon>
+        {!hideRightIcon && (
+          <StyledSectionRightIcon>
+            <Feather name="chevron-right" size={20} color="#999" />
+          </StyledSectionRightIcon>
+        )}
       </StyledSectionItemContainer>
     </StyledSectionItem>
   )
