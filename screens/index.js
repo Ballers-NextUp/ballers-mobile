@@ -3,6 +3,7 @@ import HomeScreen from './HomeScreen'
 import DetailsScreen from './DetailsScreen'
 import EventFormScreen from './EventFormScreen'
 import AccountScreen from './AccountScreen'
+import AccountFormScreen from './AccountFormScreen'
 
 export {
   GetStartedScreen,
@@ -10,4 +11,5 @@ export {
   DetailsScreen,
   EventFormScreen,
   AccountScreen,
+  AccountFormScreen,
 }
