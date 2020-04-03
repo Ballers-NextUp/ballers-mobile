@@ -35,6 +35,8 @@ const AccountFormScreen = ({ navigation }) => {
       quality: 0.5,
     })
 
+    if (result.cancelled === true) return
+
     setUser({ ...user, photoURL: result.uri })
   }
 
