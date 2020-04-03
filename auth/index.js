@@ -3,6 +3,7 @@ import * as Google from 'expo-google-app-auth'
 
 import getEnvVars from '../environment'
 import config from './config'
+import { urlToBlob } from '../helpers'
 
 const { androidClientId, iosClientId } = getEnvVars()
 
@@ -116,8 +117,43 @@ const signOut = async () => {
   return response
 }
 
-const updateProfile = async (user) => {
-  const { displayName, photoURL } = user
+const getProfileImageURL = async () => {
+  let url = {}
+
+  try {
+    const photoURL = await firebase
+      .storage()
+      .ref(`users/${auth.currentUser.uid}/profile.jpg`)
+      .getDownloadURL()
+
+    url = photoURL
+  } catch (error) {
+    console.log(error.message)
+  }
+
+  return url
+}
+
+const getProfileImageURI = async (uri) => {
+  let imageURI = ''
+  const blob = await urlToBlob(uri)
+
+  try {
+    await firebase
+      .storage()
+      .ref(`users/${auth.currentUser.uid}/profile.jpg`)
+      .put(blob)
+
+    imageURI = getProfileImageURL()
+  } catch (error) {
+    console.log(error.message)
+  }
+
+  return imageURI
+}
+
+const updateProfile = async (updatedUser) => {
+  const { displayName, photoURL } = updatedUser
   let response = {
     type: '',
     title: '',
@@ -127,7 +163,7 @@ const updateProfile = async (user) => {
   try {
     await auth.currentUser.updateProfile({
       displayName,
-      photoURL,
+      photoURL: await getProfileImageURI(photoURL),
     })
 
     response = {

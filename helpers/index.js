@@ -1,3 +1,4 @@
 import setAvatarBackgroundColor from './avatar'
+import urlToBlob from './urlToBlob'
 
-export { setAvatarBackgroundColor }
+export { setAvatarBackgroundColor, urlToBlob }
