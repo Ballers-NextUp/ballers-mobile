@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { View } from 'react-native'
-import firebase from '../auth'
+import { signOut } from '../auth'
 
 import { Section, SectionItem, LabeledInfo, Avatar } from '../components'
 import UserContext from '../context'
@@ -8,12 +8,8 @@ import UserContext from '../context'
 const AccountScreen = ({ navigation }) => {
   const { currentUser } = useContext(UserContext)
 
-  const handleSignOut = () => {
-    const auth = firebase.auth()
-    auth
-      .signOut()
-      .then(() => console.log('sign out with success'))
-      .catch((error) => console.log(error))
+  const handleSignOut = async () => {
+    await signOut()
   }
 
   return (
