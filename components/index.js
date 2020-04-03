@@ -9,6 +9,7 @@ import { ActionsBar, ActionsBarButton } from './ActionsBar'
 import LabeledInfo from './LabeledInfo'
 import Avatar from './Avatar'
 import RoundedButton from './RoundedButton'
+import { Section, SectionItem } from './Section'
 
 export {
   Input,
@@ -24,4 +25,6 @@ export {
   LabeledInfo,
   Avatar,
   RoundedButton,
+  Section,
+  SectionItem,
 }
