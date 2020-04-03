@@ -1,15 +1,22 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
+import firebase from 'firebase'
 
 import MainTabNavigation from './MainTabNavigation'
 import AuthStackNavigation from './AuthStackNavigation'
-
-import UserContext from '../context'
+import store from '../store'
 
 const Stack = createStackNavigator()
 
 const MainStackNavigation = () => {
-  const { currentUser } = useContext(UserContext)
+  const { state, dispatch } = useContext(store)
+  const { currentUser } = state
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      dispatch({ type: 'get_current_user', payload: user })
+    })
+  }, [currentUser])
 
   return (
     <Stack.Navigator>

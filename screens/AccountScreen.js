@@ -3,10 +3,11 @@ import { View } from 'react-native'
 import { signOut } from '../auth'
 
 import { Section, SectionItem, LabeledInfo, Avatar } from '../components'
-import UserContext from '../context'
+import store from '../store'
 
 const AccountScreen = ({ navigation }) => {
-  const { currentUser } = useContext(UserContext)
+  const { state } = useContext(store)
+  const { currentUser } = state
 
   const handleSignOut = async () => {
     await signOut()

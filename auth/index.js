@@ -29,7 +29,7 @@ const signUp = async (email, password) => {
     }
   } catch (error) {
     response = {
-      type: 'error',
+      type: 'danger',
       title: 'An error ocurred',
       description: error.message,
     }
@@ -55,7 +55,7 @@ const signIn = async (email, password) => {
     }
   } catch (error) {
     response = {
-      type: 'error',
+      type: 'danger',
       title: 'An error ocurred',
       description: error.message,
     }
@@ -81,7 +81,7 @@ const forgotPassword = async (email) => {
     }
   } catch (error) {
     response = {
-      type: 'error',
+      type: 'danger',
       title: 'An error ocurred',
       description: error.message,
     }
@@ -107,7 +107,7 @@ const signOut = async () => {
     }
   } catch (error) {
     response = {
-      type: 'error',
+      type: 'danger',
       title: 'An error ocurred',
       description: error.message,
     }
@@ -137,7 +137,7 @@ const updateProfile = async (user) => {
     }
   } catch (error) {
     response = {
-      type: 'error',
+      type: 'danger',
       title: 'An error ocurred',
       description: error.message,
     }

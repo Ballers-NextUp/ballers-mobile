@@ -5,7 +5,7 @@ import * as Permissions from 'expo-permissions'
 
 import { showMessage } from 'react-native-flash-message'
 import { updateProfile } from '../auth'
-import UserContext from '../context'
+import store from '../store'
 import {
   SectionItem,
   Avatar,
@@ -15,7 +15,9 @@ import {
 } from '../components'
 
 const AccountFormScreen = ({ navigation }) => {
-  const { currentUser } = useContext(UserContext)
+  const { state, dispatch } = useContext(store)
+  const { currentUser } = state
+
   const [user, setUser] = useState({
     displayName: currentUser.displayName,
     photoUrl: currentUser.photoURL,
@@ -44,7 +46,10 @@ const AccountFormScreen = ({ navigation }) => {
     const response = await updateProfile(user)
     const { title, description, type } = response
 
-    navigation.navigate('Account')
+    if (response.type === 'success') {
+      dispatch({ type: 'update_profile', payload: user })
+      navigation.navigate('Account')
+    }
 
     return showMessage({
       message: title,
