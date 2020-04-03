@@ -28,7 +28,7 @@ const StyledInitial = styled.Text`
 `
 
 const Avatar = ({ source, name, ...rest }) => {
-  return source ? (
+  return source && source.uri ? (
     <StyledAvatar source={source} {...rest} />
   ) : (
     <StyledAvatarPlaceholder backgroundColor={setAvatarBackgroundColor(name)}>

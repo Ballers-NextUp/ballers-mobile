@@ -23,11 +23,11 @@ const AccountScreen = ({ navigation }) => {
             >
               <LabeledInfo alignItems="center" flexDirection="row">
                 <Avatar
-                  name={currentUser.displayName}
+                  name={currentUser.displayName || currentUser.email}
                   source={{ uri: currentUser.photoURL }}
                 />
                 <LabeledInfo
-                  label={currentUser.displayName}
+                  label={currentUser.displayName || currentUser.email}
                   text="Edit perfil"
                 />
               </LabeledInfo>
