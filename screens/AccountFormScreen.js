@@ -1,8 +1,10 @@
-import React, { useContext, useState } from 'react'
-import { View, Text } from 'react-native'
+import React, { useContext, useState, useLayoutEffect } from 'react'
+import { View, Button } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
 import * as Permissions from 'expo-permissions'
 
+import { showMessage } from 'react-native-flash-message'
+import { updateProfile } from '../auth'
 import UserContext from '../context'
 import {
   SectionItem,
@@ -12,12 +14,11 @@ import {
   FormField,
 } from '../components'
 
-const AccountFormScreen = () => {
+const AccountFormScreen = ({ navigation }) => {
   const { currentUser } = useContext(UserContext)
   const [user, setUser] = useState({
     displayName: currentUser.displayName,
     photoUrl: currentUser.photoURL,
-    email: currentUser.email,
   })
 
   const handleAvatar = async () => {
@@ -35,12 +36,35 @@ const AccountFormScreen = () => {
     setUser({ ...user, photoURL: result.uri })
   }
 
+  const handleChange = (name, value) => {
+    setUser({ ...user, [name]: value })
+  }
+
+  const handleUpdateProfile = async () => {
+    const response = await updateProfile(user)
+    const { title, description, type } = response
+
+    navigation.navigate('Account')
+
+    return showMessage({
+      message: title,
+      description,
+      type,
+    })
+  }
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => <Button onPress={handleUpdateProfile} title="Save" />,
+    })
+  })
+
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
       <SectionItem hideRightIcon onPress={handleAvatar}>
         <LabeledInfo alignItems="center" flexDirection="row">
           <Avatar
-            name={user.displayName || user.email}
+            name={currentUser.displayName || currentUser.email}
             source={{ uri: user.photoURL }}
           />
           <LabeledInfo text="Change perfil photo" />
@@ -49,9 +73,10 @@ const AccountFormScreen = () => {
       <Container>
         <FormField
           label="Name"
-          name="Name"
+          name="displayName"
           placeholder="Insert your name"
           value={user.displayName}
+          onChange={handleChange}
         />
       </Container>
     </View>

@@ -90,7 +90,7 @@ const forgotPassword = async (email) => {
   return response
 }
 
-const signOut = async (email) => {
+const signOut = async () => {
   let response = {
     type: '',
     title: '',
@@ -104,6 +104,36 @@ const signOut = async (email) => {
       type: 'success',
       title: 'Success',
       description: 'User signed out with success',
+    }
+  } catch (error) {
+    response = {
+      type: 'error',
+      title: 'An error ocurred',
+      description: error.message,
+    }
+  }
+
+  return response
+}
+
+const updateProfile = async (user) => {
+  const { displayName, photoURL } = user
+  let response = {
+    type: '',
+    title: '',
+    description: '',
+  }
+
+  try {
+    await auth.currentUser.updateProfile({
+      displayName,
+      photoURL,
+    })
+
+    response = {
+      type: 'success',
+      title: 'Success',
+      description: 'User info updated with success',
     }
   } catch (error) {
     response = {
@@ -182,4 +212,11 @@ const signInWithGoogleAsync = async () => {
 
 export default firebase
 
-export { signUp, signIn, forgotPassword, signInWithGoogleAsync, signOut }
+export {
+  signUp,
+  signIn,
+  forgotPassword,
+  signInWithGoogleAsync,
+  signOut,
+  updateProfile,
+}
