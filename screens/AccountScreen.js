@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { View } from 'react-native'
 import firebase from '../auth'
 
 import { Section, SectionItem, LabeledInfo, Avatar } from '../components'
+import UserContext from '../context'
 
-const AccountScreen = () => {
+const AccountScreen = ({ navigation }) => {
+  const { currentUser } = useContext(UserContext)
+
   const handleSignOut = () => {
     const auth = firebase.auth()
     auth
@@ -15,23 +18,36 @@ const AccountScreen = () => {
 
   return (
     <View style={{ flex: 1 }}>
-      <Section>
-        <SectionItem first>
-          <LabeledInfo alignItems="center" flexDirection="row">
-            <Avatar name="Fulano da Silva" />
-            <LabeledInfo label="Fulano da Silva" text="Edit perfil" />
-          </LabeledInfo>
-        </SectionItem>
-      </Section>
-      <Section>
-        <SectionItem
-          first
-          text="Sign Out"
-          iconName="log-out"
-          textColor="#f00"
-          onPress={handleSignOut}
-        />
-      </Section>
+      {currentUser && (
+        <>
+          <Section>
+            <SectionItem
+              first
+              onPress={() => navigation.navigate('Edit Account')}
+            >
+              <LabeledInfo alignItems="center" flexDirection="row">
+                <Avatar
+                  name={currentUser.displayName}
+                  source={{ uri: currentUser.photoURL }}
+                />
+                <LabeledInfo
+                  label={currentUser.displayName}
+                  text="Edit perfil"
+                />
+              </LabeledInfo>
+            </SectionItem>
+          </Section>
+          <Section>
+            <SectionItem
+              first
+              text="Sign Out"
+              iconName="log-out"
+              textColor="#f00"
+              onPress={handleSignOut}
+            />
+          </Section>
+        </>
+      )}
     </View>
   )
 }
