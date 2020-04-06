@@ -1,6 +1,6 @@
 import * as Google from 'expo-google-app-auth'
 
-import getEnvVars from '../environment'
+import getEnvVars from '../../environment'
 import onGoogleSignIn from './onGoogleSignIn'
 
 const { androidClientId, iosClientId } = getEnvVars()

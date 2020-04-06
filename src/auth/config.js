@@ -1,4 +1,4 @@
-import getEnvVars from '../environment'
+import getEnvVars from '../../environment'
 
 const { firebaseApiKey, firebaseAppId } = getEnvVars()
 

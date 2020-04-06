@@ -2,8 +2,8 @@ import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import FlashMessage from 'react-native-flash-message'
 
-import MainStackNavigation from './navigations/MainStackNavigation'
-import { StateProvider } from './store'
+import MainStackNavigation from './src/navigations/MainStackNavigation'
+import { StateProvider } from './src/store'
 
 const App = () => {
   return (
