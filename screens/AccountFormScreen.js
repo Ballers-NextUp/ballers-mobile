@@ -1,4 +1,4 @@
-import React, { useContext, useState, useLayoutEffect, useEffect } from 'react'
+import React, { useContext, useState, useLayoutEffect } from 'react'
 import { View, Button } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
 import * as Permissions from 'expo-permissions'
@@ -12,10 +12,12 @@ import {
   LabeledInfo,
   Container,
   FormField,
+  Loading,
 } from '../components'
 
 const AccountFormScreen = ({ navigation }) => {
   const { state, dispatch } = useContext(store)
+  const [loading, setLoading] = useState(false)
   const { currentUser } = state
 
   const [user, setUser] = useState({
@@ -45,11 +47,14 @@ const AccountFormScreen = ({ navigation }) => {
   }
 
   const handleUpdateProfile = async () => {
+    setLoading(true)
+
     const response = await updateProfile(user)
     const { title, description, type } = response
 
     if (response.type === 'success') {
       dispatch({ type: 'update_profile', payload: user })
+      setLoading(false)
       navigation.navigate('Account')
     }
 
@@ -67,26 +72,28 @@ const AccountFormScreen = ({ navigation }) => {
   })
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#fff' }}>
-      <SectionItem hideRightIcon onPress={handleAvatar}>
-        <LabeledInfo alignItems="center" flexDirection="row">
-          <Avatar
-            name={currentUser.displayName || currentUser.email}
-            source={{ uri: user.photoURL }}
+    <Loading isActive={loading}>
+      <View style={{ flex: 1, backgroundColor: '#fff' }}>
+        <SectionItem hideRightIcon onPress={handleAvatar}>
+          <LabeledInfo alignItems="center" flexDirection="row">
+            <Avatar
+              name={currentUser.displayName || currentUser.email}
+              source={{ uri: user.photoURL }}
+            />
+            <LabeledInfo text="Change perfil photo" />
+          </LabeledInfo>
+        </SectionItem>
+        <Container>
+          <FormField
+            label="Name"
+            name="displayName"
+            placeholder="Insert your name"
+            value={user.displayName}
+            onChange={handleChange}
           />
-          <LabeledInfo text="Change perfil photo" />
-        </LabeledInfo>
-      </SectionItem>
-      <Container>
-        <FormField
-          label="Name"
-          name="displayName"
-          placeholder="Insert your name"
-          value={user.displayName}
-          onChange={handleChange}
-        />
-      </Container>
-    </View>
+        </Container>
+      </View>
+    </Loading>
   )
 }
 

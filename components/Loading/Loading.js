@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components/native'
+import { ActivityIndicator, View } from 'react-native'
 
 const StyledLoading = styled.View`
   position: absolute;
@@ -15,13 +16,22 @@ const StyledLoading = styled.View`
 `
 
 const StyledLoadingText = styled.Text`
+  margin-top: 16px;
+  font-size: 16px;
   text-align: center;
 `
 
 const Loading = ({ isActive, children }) => {
   return (
     <StyledLoading>
-      {isActive ? <StyledLoadingText>Loading...</StyledLoadingText> : children}
+      {isActive ? (
+        <View>
+          <ActivityIndicator size="large" />
+          <StyledLoadingText>Loading</StyledLoadingText>
+        </View>
+      ) : (
+        children
+      )}
     </StyledLoading>
   )
 }
