@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import firebase from 'firebase'
-import FlashMessage, { showMessage } from 'react-native-flash-message'
+import FlashMessage from 'react-native-flash-message'
 
 import MainTabNavigation from './MainTabNavigation'
 import AuthStackNavigation from './AuthStackNavigation'
@@ -19,7 +19,7 @@ const MainStackNavigation = () => {
   useEffect(() => {
     setLoading(true)
     firebase.auth().onAuthStateChanged((user) => {
-      dispatch({ type: 'get_current_user', payload: user })
+      dispatch({ type: 'set_current_user', payload: user })
       setLoading(false)
     })
   }, [])

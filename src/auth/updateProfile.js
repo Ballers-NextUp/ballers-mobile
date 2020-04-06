@@ -3,6 +3,7 @@ import getProfileImageURI from './getProfileImageURI'
 
 const updateProfile = async (updatedUser) => {
   const { displayName, photoURL } = updatedUser
+  const urlRegex = /(^http[s]?:\/{2})|(^www)|(^\/{1,2})/igm
   let response = {
     type: '',
     title: '',
@@ -12,7 +13,9 @@ const updateProfile = async (updatedUser) => {
   try {
     await firebase.auth().currentUser.updateProfile({
       displayName,
-      photoURL: await getProfileImageURI(photoURL),
+      photoURL: urlRegex.test(photoURL)
+        ? photoURL
+        : await getProfileImageURI(photoURL),
     })
 
     response = {

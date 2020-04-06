@@ -4,7 +4,7 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'get_current_user':
+    case 'set_current_user':
       return { ...state, currentUser: action.payload }
     case 'update_profile':
       return {
