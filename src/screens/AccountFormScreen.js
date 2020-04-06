@@ -1,4 +1,4 @@
-import React, { useContext, useState, useLayoutEffect } from 'react'
+import React, { useContext, useState, useLayoutEffect, useEffect } from 'react'
 import { View, Button } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
 import * as Permissions from 'expo-permissions'

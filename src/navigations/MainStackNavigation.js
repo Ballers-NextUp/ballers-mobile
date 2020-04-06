@@ -1,18 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import firebase from 'firebase'
+import FlashMessage, { showMessage } from 'react-native-flash-message'
 
 import MainTabNavigation from './MainTabNavigation'
 import AuthStackNavigation from './AuthStackNavigation'
-import { Loading } from '../components'
 import store from '../store'
+
+import { Loading } from '../components'
 
 const Stack = createStackNavigator()
 
 const MainStackNavigation = () => {
   const { state, dispatch } = useContext(store)
-  const [loading, setLoading] = useState(false)
   const { currentUser } = state
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     setLoading(true)
@@ -20,7 +22,7 @@ const MainStackNavigation = () => {
       dispatch({ type: 'get_current_user', payload: user })
       setLoading(false)
     })
-  }, [currentUser])
+  }, [])
 
   return (
     <Loading isActive={loading}>
@@ -39,6 +41,7 @@ const MainStackNavigation = () => {
           />
         )}
       </Stack.Navigator>
+      <FlashMessage position="bottom" />
     </Loading>
   )
 }

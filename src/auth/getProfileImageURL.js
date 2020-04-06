@@ -2,7 +2,7 @@ import firebase from 'firebase'
 
 const getProfileImageURL = async () => {
   let url = {}
-  const userUID = firebase.auth().currentUser.uid
+  const userUID = await firebase.auth().currentUser.uid
 
   try {
     const photoURL = await firebase

@@ -5,12 +5,12 @@ import getProfileImageURL from './getProfileImageURL'
 const getProfileImageURI = async (uri) => {
   let imageURI = ''
   const blob = await urlToBlob(uri)
-  const userUID = firebase.auth().currentUser.uid
+  const userUID = await firebase.auth().currentUser.uid
 
   try {
     await firebase.storage().ref(`users/${userUID}/profile.jpg`).put(blob)
 
-    imageURI = getProfileImageURL()
+    imageURI = await getProfileImageURL()
   } catch (error) {
     console.log(error.message)
   }
