@@ -1,21 +1,18 @@
 import firebase from 'firebase'
+import { urlToBlob } from '../helpers'
 
-const getProfileImageURL = async () => {
-  let url = {}
-  const userUID = await firebase.auth().currentUser.uid
+const getProfileImageURL = async (uri) => {
+  // TODO: Fix blob bug
+  const blob = await urlToBlob(uri)
+  const userUID = firebase.auth().currentUser.uid
 
-  try {
-    const photoURL = await firebase
-      .storage()
-      .ref(`users/${userUID}/profile.jpg`)
-      .getDownloadURL()
+  const ref = firebase.storage().ref(`users/${userUID}/profile.jpg`)
+  await ref.put(blob)
+  const remoteURI = await ref.getDownloadURL()
 
-    url = photoURL
-  } catch (error) {
-    console.log(error.message)
-  }
+  blob.close()
 
-  return url
+  return remoteURI
 }
 
 export default getProfileImageURL

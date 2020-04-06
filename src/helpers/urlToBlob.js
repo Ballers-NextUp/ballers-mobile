@@ -1,4 +1,4 @@
-const urlToBlob = (url) => {
+const urlToBlob = (uri) => {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest()
     xhr.onerror = reject
@@ -7,7 +7,7 @@ const urlToBlob = (url) => {
         resolve(xhr.response)
       }
     }
-    xhr.open('GET', url)
+    xhr.open('GET', uri, true)
     xhr.responseType = 'blob' // convert type
     xhr.send()
   })

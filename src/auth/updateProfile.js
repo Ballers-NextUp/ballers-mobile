@@ -1,5 +1,5 @@
 import firebase from 'firebase'
-import getProfileImageURI from './getProfileImageURI'
+import getProfileImageURL from './getProfileImageURL'
 
 const updateProfile = async (updatedUser) => {
   const { displayName, photoURL } = updatedUser
@@ -15,7 +15,7 @@ const updateProfile = async (updatedUser) => {
       displayName,
       photoURL: urlRegex.test(photoURL)
         ? photoURL
-        : await getProfileImageURI(photoURL),
+        : await getProfileImageURL(photoURL),
     })
 
     response = {
