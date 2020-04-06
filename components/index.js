@@ -10,6 +10,7 @@ import LabeledInfo from './LabeledInfo'
 import Avatar from './Avatar'
 import RoundedButton from './RoundedButton'
 import { Section, SectionItem } from './Section'
+import Loading from './Loading'
 
 export {
   Input,
@@ -27,4 +28,5 @@ export {
   RoundedButton,
   Section,
   SectionItem,
+  Loading,
 }
