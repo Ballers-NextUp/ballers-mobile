@@ -2,7 +2,7 @@ import firebase from 'firebase'
 import { urlToBlob } from '../helpers'
 
 const getProfileImageURL = async (uri) => {
-  // TODO: Fix blob bug
+  // TODO: Understand why it seems to fail sometimes
   const blob = await urlToBlob(uri)
   const userUID = firebase.auth().currentUser.uid
 

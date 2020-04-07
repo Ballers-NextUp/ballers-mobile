@@ -3,7 +3,7 @@ import getProfileImageURL from './getProfileImageURL'
 
 const updateProfile = async (updatedUser) => {
   const { displayName, photoURL } = updatedUser
-  const urlRegex = /(^http[s]?:\/{2})|(^www)|(^\/{1,2})/igm
+  const urlRegex = /(^http[s]?:\/{2})|(^www)|(^\/{1,2})/gim
   let response = {
     type: '',
     title: '',
