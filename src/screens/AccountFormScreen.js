@@ -1,5 +1,5 @@
-import React, { useContext, useState, useLayoutEffect, useEffect } from 'react'
-import { View, Button } from 'react-native'
+import React, { useContext, useState, useLayoutEffect } from 'react'
+import { View } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
 import * as Permissions from 'expo-permissions'
 
@@ -13,6 +13,7 @@ import {
   Container,
   FormField,
   Loading,
+  HeaderButtonRight,
 } from '../components'
 
 const AccountFormScreen = ({ navigation }) => {
@@ -68,7 +69,9 @@ const AccountFormScreen = ({ navigation }) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => <Button onPress={handleUpdateProfile} title="Save" />,
+      headerRight: () => (
+        <HeaderButtonRight onPress={handleUpdateProfile} title="Save" />
+      ),
     })
   })
 

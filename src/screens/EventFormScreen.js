@@ -1,10 +1,15 @@
 import React, { useState, useLayoutEffect, useEffect } from 'react'
-import { ScrollView, KeyboardAvoidingView, Button, View } from 'react-native'
+import { ScrollView, KeyboardAvoidingView, View } from 'react-native'
 import styled from 'styled-components/native'
 import { LinearGradient } from 'expo-linear-gradient'
 import * as ImagePicker from 'expo-image-picker'
 import * as Permissions from 'expo-permissions'
-import { Container, FormField, ActionsBarButton } from '../components'
+import {
+  Container,
+  FormField,
+  ActionsBarButton,
+  HeaderButtonRight,
+} from '../components'
 
 const StyledImageUpload = styled.View`
   position: relative;
@@ -91,7 +96,9 @@ const EventFormScreen = ({ navigation, route }) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => <Button onPress={() => alert('Saved')} title="Save" />,
+      headerRight: () => (
+        <HeaderButtonRight onPress={() => alert('Saved')} title="Save" />
+      ),
     })
   })
 

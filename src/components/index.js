@@ -11,6 +11,7 @@ import Avatar from './Avatar'
 import RoundedButton from './RoundedButton'
 import { Section, SectionItem } from './Section'
 import Loading from './Loading'
+import HeaderButtonRight from './HeaderButtonRight'
 
 export {
   Input,
@@ -29,4 +30,5 @@ export {
   Section,
   SectionItem,
   Loading,
+  HeaderButtonRight,
 }
