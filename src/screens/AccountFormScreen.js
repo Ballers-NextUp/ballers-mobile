@@ -52,9 +52,10 @@ const AccountFormScreen = ({ navigation }) => {
     const response = await updateProfile(user)
     const { title, description, type } = response
 
+    setLoading(false)
+
     if (response.type === 'success') {
       dispatch({ type: 'update_profile', payload: user })
-      setLoading(false)
       navigation.navigate('Account')
     }
 

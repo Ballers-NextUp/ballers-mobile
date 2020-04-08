@@ -3,6 +3,10 @@ import { urlToBlob } from '../helpers'
 
 const getProfileImageURL = async (uri) => {
   // TODO: Understand why it seems to fail sometimes
+  const urlRegex = /(^http[s]?:\/{2})|(^www)|(^\/{1,2})/gim
+
+  if (urlRegex.test(uri)) return uri
+
   const blob = await urlToBlob(uri)
   const userUID = firebase.auth().currentUser.uid
 
