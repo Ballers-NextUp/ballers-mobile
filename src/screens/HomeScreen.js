@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StatusBar } from 'react-native'
+import { StatusBar, Platform } from 'react-native'
 import styled from 'styled-components/native'
 import * as Location from 'expo-location'
 import * as Permissions from 'expo-permissions'
@@ -19,8 +19,7 @@ const Container = styled.View`
 
 const Content = styled.View`
   position: relative;
-  padding: 32px 0;
-  margin-bottom: 25px;
+  margin-bottom: ${Platform.OS === 'ios' ? '50px' : '75px'};
   z-index: 3;
 `
 
