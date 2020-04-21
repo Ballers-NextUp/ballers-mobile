@@ -9,7 +9,10 @@ const appIcon = require('../../assets/ballers-icon.png')
 
 const StyledContent = styled.View`
   width: 100%;
-  padding: 32px;
+  height: 100%;
+  justify-content: center;
+  padding-horizontal: 32px;
+  background-color: #fff;
 `
 
 const StyleAppIcon = styled.Image`
@@ -31,7 +34,13 @@ const BackButtonText = styled.Text`
   padding-vertical: 5px;
 `
 
-const AuthscreenContainer = ({ children, title, subtitle, hasBackButton }) => {
+const AuthscreenContainer = ({
+  children,
+  title,
+  subtitle,
+  hasBackButton,
+  footer,
+}) => {
   const navigation = useNavigation()
 
   return (
@@ -50,6 +59,7 @@ const AuthscreenContainer = ({ children, title, subtitle, hasBackButton }) => {
             <BackButtonText>Back</BackButtonText>
           </BackButton>
         )}
+        {footer}
       </StyledContent>
     </View>
   )

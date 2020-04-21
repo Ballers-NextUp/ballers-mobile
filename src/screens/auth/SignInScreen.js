@@ -10,8 +10,6 @@ import { BorderedInput, RoundedButton } from '../../components'
 import AuthScreenContainer from './AuthScreenContainer'
 
 const StyledFooter = styled.View`
-  position: absolute;
-  bottom: 16px;
   flex-direction: row;
   width: 100%;
   align-items: center;
@@ -64,56 +62,56 @@ const SignInScreen = ({ navigation }) => {
     await signInWithGoogleAsync()
   }
 
+  const CustomFooter = () => (
+    <StyledFooter>
+      <StyledFooterText>Are you new ?&nbsp;</StyledFooterText>
+      <TouchableOpacity onPress={() => navigation.navigate('Sign Up')}>
+        <StyledFooterButtonText>Sign Up</StyledFooterButtonText>
+      </TouchableOpacity>
+    </StyledFooter>
+  )
+
   return (
-    <>
-      <AuthScreenContainer
-        title="Hello There"
-        subtitle="Find pick up basketball near you"
-      >
-        <BorderedInput
-          value={user.email}
-          name="email"
-          placeholder="E-mail"
-          onChange={handleChange}
-          textContentType="username"
-          keyboardType="email-address"
-          style={{ marginBottom: 20 }}
-        />
-        <BorderedInput
-          name="password"
-          value={user.password}
-          onChange={handleChange}
-          placeholder="Password"
-          textContentType="password"
-          secureTextEntry
-        />
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Forgot Password')}
-        >
-          <StyledForgotPasswordText>Forgot password ?</StyledForgotPasswordText>
-        </TouchableOpacity>
-        <RoundedButton
-          type="brand"
-          disabled={user.email === '' || user.password === ''}
-          title="Sign In"
-          style={{ marginTop: 32 }}
-          onPress={handleSignIn}
-        />
-        <RoundedButton
-          type="phantom"
-          icon={<AntDesign name="google" size={20} color="#666" />}
-          title="Continue with Google"
-          style={{ marginTop: 12 }}
-          onPress={handleSignInWithProvider}
-        />
-      </AuthScreenContainer>
-      <StyledFooter>
-        <StyledFooterText>Are you new ?&nbsp;</StyledFooterText>
-        <TouchableOpacity onPress={() => navigation.navigate('Sign Up')}>
-          <StyledFooterButtonText>Sign Up</StyledFooterButtonText>
-        </TouchableOpacity>
-      </StyledFooter>
-    </>
+    <AuthScreenContainer
+      title="Hello There"
+      subtitle="Find pick up basketball near you"
+      footer={<CustomFooter />}
+    >
+      <BorderedInput
+        value={user.email}
+        name="email"
+        placeholder="E-mail"
+        onChange={handleChange}
+        textContentType="username"
+        keyboardType="email-address"
+        style={{ marginBottom: 20 }}
+      />
+      <BorderedInput
+        name="password"
+        value={user.password}
+        onChange={handleChange}
+        placeholder="Password"
+        textContentType="password"
+        secureTextEntry
+      />
+      <TouchableOpacity onPress={() => navigation.navigate('Forgot Password')}>
+        <StyledForgotPasswordText>Forgot password ?</StyledForgotPasswordText>
+      </TouchableOpacity>
+      <RoundedButton
+        type="brand"
+        disabled={user.email === '' || user.password === ''}
+        title="Sign In"
+        style={{ marginTop: 32 }}
+        onPress={handleSignIn}
+      />
+      <RoundedButton
+        type="phantom"
+        icon={<AntDesign name="google" size={20} color="#666" />}
+        title="Continue with Google"
+        style={{ marginTop: 12 }}
+        onPress={handleSignInWithProvider}
+      />
+    </AuthScreenContainer>
   )
 }
 
