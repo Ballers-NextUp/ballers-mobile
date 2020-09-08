@@ -107,6 +107,7 @@ const Input = ({
             onConfirm={handleDate}
             onCancel={hideDatepicker}
             isVisible={datePickerVisibility}
+            isDarkModeEnabled={false}
           />
         </>
       )}

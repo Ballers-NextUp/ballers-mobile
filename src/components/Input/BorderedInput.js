@@ -108,7 +108,7 @@ const BorderedInput = ({
             onConfirm={handleDate}
             onCancel={hideDatepicker}
             isVisible={datePickerVisibility}
-            isDarkModeEnabled
+            isDarkModeEnabled={false}
           />
         </>
       )}
